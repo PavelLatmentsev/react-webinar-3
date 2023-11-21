@@ -5,6 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.currentId = 1; // либо можно длину изначального массива;
   }
 
   /**
@@ -27,7 +28,7 @@ class Store {
   getState() {
     return this.state;
   }
-
+   
   /**
    * Установка состояния
    * @param newState {Object}
@@ -37,14 +38,25 @@ class Store {
     // Вызываем всех слушателей
     for (const listener of this.listeners) listener();
   }
-
+    /**
+   * Получение уникального идентификатора
+   */
+  getId()  {
+      const index = this.state.list.map(item => item.code).indexOf(this.currentId);
+      if (index === -1) {
+        return   this.currentId;
+      } else {
+        this.currentId += 1;
+        return this.getId() // с помощью рекурсии добираюсь до уникального id;
+      } 
+  }
   /**
    * Добавление новой записи
    */
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, {code: this.getId(), title: 'Новая запись'}]
     })
   };
 
@@ -68,7 +80,10 @@ class Store {
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
-          item.selected = !item.selected;
+          item.selected = !item.selected
+          item = {...item, selectedCount: item.selected ? (item.selectedCount || 0) + 1 : item.selectedCount }
+        } else {
+          item.selected = false;
         }
         return item;
       })
