@@ -47,9 +47,10 @@ class Store {
         return   this.currentId;
       } else {
         this.currentId += 1;
-        return this.getId() // с помощью рекурсии добираюсь до уникального id;
+        return this.getId() // с помощью рекурсии поднимаюсь от первого до уникального id;
       } 
   }
+  
   /**
    * Добавление новой записи
    */

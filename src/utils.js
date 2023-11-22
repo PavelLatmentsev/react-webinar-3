@@ -26,3 +26,16 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }   
+
+export function getDeclination(num) {
+let n = Math.abs(num);
+n %= 100;
+if (n >= 12 && n <= 14) {
+ return "раз";
+}
+n %= 10;
+if (n>1 && n<5) {
+ return "раза"
+} 
+return "раз"
+}
