@@ -5,7 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
-    this.currentId = 1; // либо можно длину изначального массива;
+    this.currentId = this.state.list.length;
   }
 
   /**
@@ -42,13 +42,7 @@ class Store {
    * Получение уникального идентификатора
    */
   getId()  {
-      const index = this.state.list.map(item => item.code).indexOf(this.currentId);
-      if (index === -1) {
-        return   this.currentId;
-      } else {
-        this.currentId += 1;
-        return this.getId() // с помощью рекурсии поднимаюсь от первого до уникального id;
-      } 
+    return this.currentId += 1;
   }
   
   /**
