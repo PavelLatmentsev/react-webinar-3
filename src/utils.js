@@ -26,16 +26,13 @@ export function createElement(name, props = {}, ...children) {
 
   return element;
 }   
-
-export function getDeclination(num) {
-let n = Math.abs(num);
-n %= 100;
-if (n >= 12 && n <= 14) {
- return "раз";
-}
-n %= 10;
-if (n>1 && n<5) {
- return "раза"
-} 
-return "раз"
+// функция склонения. Принимает массив слов(до 3) с разным склонением(["кролик", "кролика", "кроликов"]) и возвращает результат зависящее от числа.
+export function getDeclination(num,titles) {
+  return titles[(num % 10 === 1 && num % 100 !== 11)
+                ? 0 
+                : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20) 
+                ? 1 
+                : titles.length < 3 
+                ? 0
+                : 2]
 }
