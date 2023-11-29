@@ -1,39 +1,64 @@
-import React, {useCallback} from 'react';
+import React, { useCallback, useState } from "react";
 import List from "./components/list";
 import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
+import Cart from "./components/cart";
+import ModalLayout from "./components/modal-layout";
 
 /**
  * Приложение
  * @param store {Store} Хранилище состояния приложения
  * @returns {React.ReactElement}
  */
-function App({store}) {
-
+function App({ store }) {
+  const [state, setState] = useState(false);
+  const onToogleState = () => {
+    setState((prevState) => !prevState);
+  };
   const list = store.getState().list;
+  const cart = store.getState().cart;
 
   const callbacks = {
-    onDeleteItem: useCallback((code) => {
-      store.deleteItem(code);
-    }, [store]),
+    onDeleteFromCart: useCallback(
+      (code) => {
+        store.deleteFromCart(code);
+      },
+      [store]
+    ),
 
-    onSelectItem: useCallback((code) => {
-      store.selectItem(code);
-    }, [store]),
-
-    onAddItem: useCallback(() => {
-      store.addItem();
-    }, [store])
-  }
+    onAddToCart: useCallback(
+      (item) => {
+        store.addToCart(item);
+      },
+      [store]
+    ),
+  };
 
   return (
     <PageLayout>
-      <Head title='Приложение на чистом JS'/>
-      <Controls onAdd={callbacks.onAddItem}/>
-      <List list={list}
-            onDeleteItem={callbacks.onDeleteItem}
-            onSelectItem={callbacks.onSelectItem}/>
+      <Head title="Магазин" />
+      <Controls
+        onAdd={callbacks.onAddItem}
+        onGetCart={callbacks.onGetCart}
+        cart={cart}
+        onToogleState={onToogleState}
+      />
+      <List
+        list={list}
+        onAddToCart={callbacks.onAddToCart}
+        btnTitle=" Добавить"
+        quantity={false}
+      />
+      <ModalLayout state={state}>
+        <Cart
+          cart={cart}
+          onDeleteFromCart={callbacks.onDeleteFromCart}
+          btnTitle=" Удалить"
+          quantity={true}
+          onToogleState={onToogleState}
+        />
+      </ModalLayout>
     </PageLayout>
   );
 }

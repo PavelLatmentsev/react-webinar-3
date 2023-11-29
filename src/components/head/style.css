@@ -1,6 +1,11 @@
 .Head {
   height: 80px;
-  background: #f5f5f5;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .Head h1 {

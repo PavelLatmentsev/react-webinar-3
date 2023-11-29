@@ -1,17 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import './style.css';
+import "./style.css";
 
-function Head({title}) {
+function Head({ title, button }) {
   return (
-    <div className='Head'>
+    <div className="Head">
       <h1>{title}</h1>
+      <>{button}</>
     </div>
-  )
+  );
 }
 
 Head.propTypes = {
-  title: PropTypes.node,
+  title: PropTypes.node.isRequired,
+  button: PropTypes.element,
 };
 
 export default React.memo(Head);

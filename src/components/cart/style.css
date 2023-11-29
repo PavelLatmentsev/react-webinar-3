@@ -1,0 +1,17 @@
+.Cart {
+  max-width: 960px;
+  min-height: 407px;
+}
+.Cart-total {
+  color: #000;
+  text-align: right;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin: 20px 120px 90px 0;
+  gap: 53px;
+}
