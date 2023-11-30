@@ -24,7 +24,7 @@ function Cart({ cart, onDeleteFromCart, btnTitle, quantity, onToogleState }) {
       {cart.length ? (
         <div className="Cart-total">
           <div>Итого: </div>
-          <div>{getSum(cart)}</div>
+          <div>{getSum(cart, "price")}</div>
         </div>
       ) : (
         <div className="Cart-total">В корзине нет товаров</div>

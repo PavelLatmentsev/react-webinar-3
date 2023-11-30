@@ -13,9 +13,6 @@ import ModalLayout from "./components/modal-layout";
  */
 function App({ store }) {
   const [state, setState] = useState(false);
-  const onToogleState = () => {
-    setState((prevState) => !prevState);
-  };
   const list = store.getState().list;
   const cart = store.getState().cart;
 
@@ -33,6 +30,9 @@ function App({ store }) {
       },
       [store]
     ),
+    onToogleState: useCallback(() => {
+      setState((prevState) => !prevState);
+    }, [store]),
   };
 
   return (
@@ -42,7 +42,7 @@ function App({ store }) {
         onAdd={callbacks.onAddItem}
         onGetCart={callbacks.onGetCart}
         cart={cart}
-        onToogleState={onToogleState}
+        onToogleState={callbacks.onToogleState}
       />
       <List
         list={list}
@@ -56,7 +56,7 @@ function App({ store }) {
           onDeleteFromCart={callbacks.onDeleteFromCart}
           btnTitle=" Удалить"
           quantity={true}
-          onToogleState={onToogleState}
+          onToogleState={callbacks.onToogleState}
         />
       </ModalLayout>
     </PageLayout>

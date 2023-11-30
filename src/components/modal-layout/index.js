@@ -5,8 +5,6 @@ import "./style.css";
 
 function ModalLayout({ children, state }) {
   const cn = bem("ModalLayout");
-  console.log(state);
-
   return (
     <div className={cn(null, [state ? "Visible" : "Unvisible"])}>
       <div className={cn("main")}>{children}</div>

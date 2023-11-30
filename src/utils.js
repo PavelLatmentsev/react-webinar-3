@@ -25,16 +25,17 @@ export const generateCode = (function (start = 0) {
   return () => ++start;
 })();
 
-export function getSum(cart) {
-  const sum = cart.reduce(function (currentSum, currentNumber) {
+export function getSum(cart, value) {
+  const sumPrice = cart.reduce(function (currentSum, currentNumber) {
     return (currentSum += currentNumber.price * currentNumber.cartCount);
   }, 0);
-  return sum;
-}
-
-export function getAllGoods(cart) {
-  const sum = cart.reduce(function (currentSum, currentNumber) {
+  const sumGoods = cart.reduce(function (currentSum, currentNumber) {
     return (currentSum += currentNumber.cartCount);
   }, 0);
-  return sum;
+  if (value === "goods") {
+    return sumGoods;
+  }
+  if (value === "price") {
+    return sumPrice;
+  }
 }

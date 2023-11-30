@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import "./style.css";
 import Button from "../button";
 import { getSum, plural } from "../../utils";
-import { getAllGoods } from "../../utils";
 function Controls({ isEmpty, cart, onToogleState }) {
   return (
     <div className="Controls">
@@ -11,10 +10,10 @@ function Controls({ isEmpty, cart, onToogleState }) {
         <>
           <div className="Controls-title">В корзине: </div>{" "}
           <div className="Controls-sum">
-            {getAllGoods(cart)
+            {getSum(cart, "goods")
               ? " " +
-                getAllGoods(cart) +
-                plural(getAllGoods(cart), {
+                getSum(cart, "goods") +
+                plural(getSum(cart, "goods"), {
                   one: " товар ",
                   few: " товара ",
                   many: " товаров ",
@@ -22,7 +21,9 @@ function Controls({ isEmpty, cart, onToogleState }) {
               : " пусто "}
           </div>{" "}
           <div className="Controls-sum">
-            {getSum(cart) ? " / " + getSum(cart).toLocaleString() + " ₽" : " "}{" "}
+            {getSum(cart, "price")
+              ? " / " + getSum(cart, "price").toLocaleString() + " ₽"
+              : " "}{" "}
           </div>
           <Button title="Перейти" onClick={() => onToogleState()} />
         </>

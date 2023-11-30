@@ -6,9 +6,6 @@
   min-height: 100%;
   min-width: 100%;
   background-color: rgba(0, 0, 0, 0.56);
-  border-radius: 10px;
-  opacity: 0;
-  transition: opacity 0.5s;
 }
 
 .ModalLayout-main {
@@ -20,16 +17,13 @@
   min-width: 960px;
   background-color: #fff;
   box-sizing: border-box;
+  border-radius: 10px;
 }
 
 .Visible {
   display: block;
-  transition: all 3s ease;
-  opacity: 1;
 }
 
 .Unvisible {
   display: none;
-  transition: all 3s ease;
-  opacity: 0;
 }

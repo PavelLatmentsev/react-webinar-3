@@ -9,4 +9,13 @@
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
+  cursor: pointer;
+}
+.Button:hover {
+  background-color: #b9bbb9;
+}
+.Button:active {
+  background-color: #969c9b;
+  box-shadow: 0 1px #cccaca;
+  transform: translateY(1px);
 }

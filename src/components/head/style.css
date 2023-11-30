@@ -6,6 +6,7 @@
   padding: 20px;
   align-items: center;
   box-sizing: border-box;
+  border-radius: 10px;
 }
 
 .Head h1 {
