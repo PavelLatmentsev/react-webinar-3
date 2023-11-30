@@ -17,6 +17,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   onClick: () => {},
+  title: "Добавить",
 };
 
 export default React.memo(Button);

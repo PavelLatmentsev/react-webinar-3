@@ -3,17 +3,17 @@ import PropTypes from "prop-types";
 import Item from "../item";
 import "./style.css";
 
-function List({ list, onAddToCart, btnTitle, onDeleteFromCart, quantity }) {
+function List(props) {
   return (
     <div className="List">
-      {list.map((item) => (
+      {props.list.map((item) => (
         <div key={item.code} className="List-item">
           <Item
             item={item}
-            onAddToCart={onAddToCart}
-            btnTitle={btnTitle}
-            onDeleteFromCart={onDeleteFromCart}
-            quantity={quantity}
+            onAddToCart={props.onAddToCart}
+            btnTitle={props.btnTitle}
+            onDeleteFromCart={props.onDeleteFromCart}
+            quantity={props.quantity}
           />
         </div>
       ))}
@@ -34,8 +34,10 @@ List.propTypes = {
 };
 
 List.defaultProps = {
-  onDeleteItem: () => {},
+  onDeleteFromCart: () => {},
   onAddToCart: () => {},
+  btnTitle: "Добавить",
+  quantity: false,
 };
 
 export default React.memo(List);

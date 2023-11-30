@@ -4,6 +4,7 @@ import "./style.css";
 import Button from "../button";
 
 function Item(props) {
+  console.log(props);
   const callbacks = {
     onAddToCart: (e) => {
       e.stopPropagation();
@@ -41,6 +42,7 @@ Item.propTypes = {
     code: PropTypes.number,
     title: PropTypes.string,
   }).isRequired,
+  onDeleteFromCart: PropTypes.func,
   onAddToCart: PropTypes.func,
   btnTitle: PropTypes.string.isRequired,
   quantity: PropTypes.bool.isRequired,
@@ -48,6 +50,9 @@ Item.propTypes = {
 
 Item.defaultProps = {
   onAddToCart: () => {},
+  onDeleteFromCart: () => {},
+  btnTitle: "Добавить",
+  quantity: false,
 };
 
 export default React.memo(Item);

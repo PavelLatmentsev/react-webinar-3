@@ -7,24 +7,24 @@ import List from "../list";
 import Button from "../button";
 import { getSum } from "../../utils";
 
-function Cart({ cart, onDeleteFromCart, btnTitle, quantity, onToogleState }) {
+function Cart(props) {
   return (
     <div className="Cart">
       <Head
         title="Корзина"
-        button={<Button title="Закрыть" onClick={onToogleState} />}
+        button={<Button title="Закрыть" onClick={props.onToogleState} />}
       />
-      <Controls isEmpty={true} onToogleState={onToogleState} />
+      <Controls isEmpty={true} onToogleState={props.onToogleState} />
       <List
-        list={cart}
-        onDeleteFromCart={onDeleteFromCart}
-        btnTitle={btnTitle}
-        quantity={quantity}
+        list={props.cart}
+        onDeleteFromCart={props.onDeleteFromCart}
+        btnTitle={props.btnTitle}
+        quantity={props.quantity}
       />
-      {cart.length ? (
+      {props.cart.length ? (
         <div className="Cart-total">
           <div>Итого: </div>
-          <div>{getSum(cart, "price")}</div>
+          <div>{getSum(props.cart, "price").toLocaleString()}</div>
         </div>
       ) : (
         <div className="Cart-total">В корзине нет товаров</div>
@@ -43,6 +43,10 @@ Cart.propTypes = {
 
 Cart.defaultProps = {
   onDeleteFromCart: () => {},
+  onToogleState: () => {},
+  cart: [],
+  btnTitle: "Добавить",
+  quantity: false,
 };
 
 export default React.memo(Cart);
