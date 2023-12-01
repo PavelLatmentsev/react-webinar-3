@@ -10,10 +10,10 @@ function Controls({ isEmpty, cart, onToogleState }) {
         <>
           <div className="Controls-title">В корзине: </div>{" "}
           <div className="Controls-sum">
-            {getSum(cart, "goods")
+            {cart.length
               ? " " +
-                getSum(cart, "goods") +
-                plural(getSum(cart, "goods"), {
+                cart.length +
+                plural(cart.length, {
                   one: " товар ",
                   few: " товара ",
                   many: " товаров ",
@@ -21,8 +21,8 @@ function Controls({ isEmpty, cart, onToogleState }) {
               : " пусто "}
           </div>{" "}
           <div className="Controls-sum">
-            {getSum(cart, "price")
-              ? " / " + getSum(cart, "price").toLocaleString() + " ₽"
+            {getSum(cart)
+              ? " / " + getSum(cart).toLocaleString() + " ₽"
               : " "}{" "}
           </div>
           <Button title="Перейти" onClick={() => onToogleState()} />

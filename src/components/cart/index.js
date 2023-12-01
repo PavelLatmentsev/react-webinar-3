@@ -24,7 +24,7 @@ function Cart(props) {
       {props.cart.length ? (
         <div className="Cart-total">
           <div>Итого: </div>
-          <div>{getSum(props.cart, "price").toLocaleString()}</div>
+          <div>{getSum(props.cart).toLocaleString()}</div>
         </div>
       ) : (
         <div className="Cart-total">В корзине нет товаров</div>
