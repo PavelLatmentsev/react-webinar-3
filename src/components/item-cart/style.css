@@ -1,0 +1,31 @@
+.Item {
+  display: flex;
+  justify-content: flex-start;
+  transition: background-color 1s;
+  font-weight: 400;
+  line-height: normal;
+  font-size: 16px;
+}
+
+.Item-code {
+  padding: 20px 10px 20px 20px;
+}
+
+.Item-title {
+  width: 100%;
+  padding: 20px 10px;
+}
+.Item-price {
+  margin-right: 24px;
+  font-size: 18px;
+}
+.Item-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 20px 20px 10px;
+  width: 100%;
+}
+.Item-quantity {
+  margin-left: 38px;
+  margin-right: 24px;
+}

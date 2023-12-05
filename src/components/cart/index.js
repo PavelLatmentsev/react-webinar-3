@@ -5,7 +5,6 @@ import Head from "../head";
 import Controls from "../controls";
 import List from "../list";
 import Button from "../button";
-import { getSum } from "../../utils";
 
 function Cart(props) {
   return (
@@ -19,12 +18,12 @@ function Cart(props) {
         list={props.cart}
         onDeleteFromCart={props.onDeleteFromCart}
         btnTitle={props.btnTitle}
-        quantity={props.quantity}
+        quantity={true}
       />
       {props.cart.length ? (
         <div className="Cart-total">
           <div>Итого: </div>
-          <div>{getSum(props.cart).toLocaleString()}</div>
+          <div>{props.totalSum.toLocaleString()}</div>
         </div>
       ) : (
         <div className="Cart-total">В корзине нет товаров</div>
@@ -37,16 +36,7 @@ Cart.propTypes = {
   onDeleteFromCart: PropTypes.func.isRequired,
   cart: PropTypes.array.isRequired,
   btnTitle: PropTypes.string.isRequired,
-  quantity: PropTypes.bool.isRequired,
   onToogleState: PropTypes.func.isRequired,
-};
-
-Cart.defaultProps = {
-  onDeleteFromCart: () => {},
-  onToogleState: () => {},
-  cart: [],
-  btnTitle: "Добавить",
-  quantity: false,
 };
 
 export default React.memo(Cart);

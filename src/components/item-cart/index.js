@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import "./style.css";
 import Button from "../button";
 
-function Item(props) {
+function ItemCart(props) {
   const callbacks = {
-    onAddToCart: (e) => {
+    onDeleteFromCart: (e) => {
       e.stopPropagation();
-      props.onAddToCart(props.item);
+      props.onDeleteFromCart(props.item.code);
     },
   };
   return (
@@ -18,23 +18,20 @@ function Item(props) {
         <div className="Item-price">
           {`${props.item.price.toLocaleString()} ₽`}{" "}
         </div>
-        <Button title={props.btnTitle} onClick={callbacks.onAddToCart} />
+        <div className="Item-quantity">{props.item.cartCount} шт</div>
+        <Button title={props.btnTitle} onClick={callbacks.onDeleteFromCart} />
       </div>
     </div>
   );
 }
 
-Item.propTypes = {
+ItemCart.propTypes = {
   item: PropTypes.shape({
     code: PropTypes.number,
     title: PropTypes.string,
   }).isRequired,
-  onAddToCart: PropTypes.func.isRequired,
+  onDeleteFromCart: PropTypes.func.isRequired,
   btnTitle: PropTypes.string.isRequired,
 };
 
-Item.defaultProps = {
-  onAddToCart: () => {},
-};
-
-export default React.memo(Item);
+export default React.memo(ItemCart);

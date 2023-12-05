@@ -24,9 +24,3 @@ export function plural(value, variants = {}, locale = "ru-RU") {
 export const generateCode = (function (start = 0) {
   return () => ++start;
 })();
-
-export function getSum(cart) {
-  return cart.reduce(function (currentSum, currentNumber) {
-    return (currentSum += currentNumber.price * currentNumber.cartCount);
-  }, 0);
-}

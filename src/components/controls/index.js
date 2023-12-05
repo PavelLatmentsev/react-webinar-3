@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 import Button from "../button";
-import { getSum, plural } from "../../utils";
-function Controls({ isEmpty, cart, onToogleState }) {
+import { plural } from "../../utils";
+function Controls({ isEmpty, cart, onToogleState, totalSum }) {
   return (
     <div className="Controls">
       {!isEmpty && (
@@ -21,9 +21,7 @@ function Controls({ isEmpty, cart, onToogleState }) {
               : " пусто "}
           </div>{" "}
           <div className="Controls-sum">
-            {getSum(cart)
-              ? " / " + getSum(cart).toLocaleString() + " ₽"
-              : " "}{" "}
+            {totalSum ? " / " + totalSum.toLocaleString() + " ₽" : " "}{" "}
           </div>
           <Button title="Перейти" onClick={() => onToogleState()} />
         </>
@@ -36,6 +34,7 @@ Controls.propTypes = {
   onToogleState: PropTypes.func,
   isEmpty: PropTypes.bool,
   cart: PropTypes.array,
+  totalSum: PropTypes.number,
 };
 
 Controls.defaultProps = {

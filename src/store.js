@@ -70,6 +70,12 @@ class Store {
       cart: this.state.cart.filter((itemCart) => code !== itemCart.code),
     });
   }
+
+  getSum() {
+    return this.state.cart.reduce(function (currentSum, currentNumber) {
+      return (currentSum += currentNumber.price * currentNumber.cartCount);
+    }, 0);
+  }
 }
 
 export default Store;

@@ -12,9 +12,10 @@ import ModalLayout from "./components/modal-layout";
  * @returns {React.ReactElement}
  */
 function App({ store }) {
-  const [state, setState] = useState(false);
+  const [modal, setModal] = useState(false);
   const list = store.getState().list;
   const cart = store.getState().cart;
+  const totalSum = store.getSum();
 
   const callbacks = {
     onDeleteFromCart: useCallback(
@@ -31,7 +32,7 @@ function App({ store }) {
       [store]
     ),
     onToogleState: useCallback(() => {
-      setState((prevState) => !prevState);
+      setModal((prevModal) => !prevModal);
     }, [store]),
   };
 
@@ -43,6 +44,7 @@ function App({ store }) {
         onGetCart={callbacks.onGetCart}
         cart={cart}
         onToogleState={callbacks.onToogleState}
+        totalSum={totalSum}
       />
       <List
         list={list}
@@ -50,13 +52,13 @@ function App({ store }) {
         btnTitle=" Добавить"
         quantity={false}
       />
-      <ModalLayout state={state}>
+      <ModalLayout modal={modal}>
         <Cart
           cart={cart}
           onDeleteFromCart={callbacks.onDeleteFromCart}
           btnTitle=" Удалить"
-          quantity={true}
           onToogleState={callbacks.onToogleState}
+          totalSum={totalSum}
         />
       </ModalLayout>
     </PageLayout>
