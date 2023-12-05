@@ -7,7 +7,7 @@ function Item(props) {
   const callbacks = {
     onAddToCart: (e) => {
       e.stopPropagation();
-      props.onAddToCart(props.item);
+      props.onAddToCart(props.item.code);
     },
   };
   return (

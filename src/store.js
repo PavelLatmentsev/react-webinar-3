@@ -40,20 +40,19 @@ class Store {
   /**
    * Добавление в корзину
    */
-  addToCart(item) {
-    const isAdd = this.state.cart.find(
-      (itemCart) => item.code === itemCart.code
-    );
+  addToCart(code) {
+    const listItem = this.state.list.find((itemList) => code === itemList.code);
+    const isAdd = this.state.cart.find((itemCart) => code === itemCart.code);
     if (!isAdd) {
       this.setState({
         ...this.state,
-        cart: [...this.state.cart, { ...item, cartCount: 1 }],
+        cart: [...this.state.cart, { ...listItem, cartCount: 1 }],
       });
     } else {
       this.setState({
         ...this.state,
         cart: this.state.cart.map((itemCart) =>
-          itemCart.code === item.code
+          itemCart.code === code
             ? { ...itemCart, cartCount: itemCart.cartCount + 1 }
             : itemCart
         ),
