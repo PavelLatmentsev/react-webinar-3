@@ -1,0 +1,29 @@
+.ItemCard {
+  padding: 0 40px;
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 21px;
+  line-height: normal;
+}
+.ItemCard span,
+.ItemCard-price {
+  font-weight: 700;
+}
+.ItemCard-price,
+.ItemCard-description,
+.ItemCard-madeIn,
+.ItemCard-year,
+.ItemCard-category,
+.ItemCard-country {
+  padding-bottom: 20px;
+}
+
+.ItemCard-btn {
+  border-radius: 2px;
+  border: 1px solid #767676;
+  background: #efefef;
+  min-width: 76px;
+  min-height: 21px;
+  cursor: pointer;
+}

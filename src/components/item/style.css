@@ -2,7 +2,7 @@
   display: flex;
   justify-content: flex-start;
   transition: background-color 1s;
-  padding-left: 10px
+  padding-left: 10px;
 }
 
 .Item_selected {
@@ -17,6 +17,17 @@
 .Item-title {
   width: 100%;
   padding: 20px 10px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+}
+.Item-title:hover {
+  text-decoration: underline;
+}
+
+.Item-title:hover {
+  text-decoration: underline;
 }
 
 .Item-actions {
@@ -24,11 +35,14 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 20px
+  gap: 20px;
 }
 
 .Item-price {
   padding: 0 0 0 10px;
   white-space: nowrap;
   font-size: 18px;
+}
+.Item-title {
+  cursor: pointer;
 }
