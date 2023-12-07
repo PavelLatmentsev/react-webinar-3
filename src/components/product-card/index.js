@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useRef } from "react";
+import { memo, useCallback, useEffect, useState, useRef } from "react";
 import Head from "../head";
 import BasketTool from "../basket-tool";
 import ItemCard from "../item-card";
@@ -11,17 +11,21 @@ import "./style.css";
 function ProductCard() {
   const { id } = useParams();
   const store = useStore();
-  const language = JSON.parse(localStorage.getItem("langValue"));
-  const tooggleProduct = useRef(null);
+  const ref = useRef(null);
+  const [language, setLanguage] = useState();
   useEffect(() => {
     store.actions.catalog.loadById(id);
     store.actions.modals.open(null);
+    setLanguage(JSON.parse(localStorage.getItem("langValue")));
   }, [id]);
   useEffect(() => {
     store.actions.language.getLanguage(language);
-    console.log(tooggleProduct.current.checked);
+    console.log(ref.current);
   }, [language]);
-
+  const onTooggleLanguage = () => {
+    setLanguage((prevState) => !prevState);
+    localStorage.setItem("langValue", !language);
+  };
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(
@@ -46,7 +50,13 @@ function ProductCard() {
   );
   return isLoading ? (
     <PageLayout>
-      <Head title={currentProduct.title} refTooggle={tooggleProduct} />
+      <Head
+        title={currentProduct.title}
+        tooggleLanguge={true}
+        langValue={language}
+        onTooggleLanguage={onTooggleLanguage}
+        refBtn={ref}
+      />
       <BasketTool
         onOpen={callbacks.openModalBasket}
         amount={amount}

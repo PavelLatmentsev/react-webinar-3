@@ -4,7 +4,6 @@ import { cn as bem } from "@bem-react/classname";
 import PaginationItem from "../pagination-item";
 import PropTypes from "prop-types";
 import useStore from "../../store/use-store";
-import useSelector from "../../store/use-selector";
 function PaginationList(props) {
   const cn = bem("Pagination");
   const store = useStore();
@@ -13,6 +12,7 @@ function PaginationList(props) {
     paginationBox.push(i);
   }
   const [currentPage, setCurrentPage] = useState(1);
+  //сокращенно от quantity
   const [pageQty, setPageQty] = useState([2, 3]);
 
   const getPage = (page, paginationBox) => {

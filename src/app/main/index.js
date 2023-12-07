@@ -11,7 +11,7 @@ import PaginationList from "../../components/pagination-list";
 function Main() {
   const store = useStore();
   const [langValue, setLangValue] = useState(false);
-  const tooggleBtn = useRef(null);
+  const ref = useRef(null);
 
   useEffect(() => {
     store.actions.catalog.load();
@@ -19,8 +19,7 @@ function Main() {
   }, []);
   useEffect(() => {
     store.actions.language.getLanguage(langValue);
-    tooggleBtn.current.checked = langValue;
-    console.log(tooggleBtn.current.checked);
+    ref.current.checked = langValue;
   }, [langValue]);
 
   const select = useSelector((state) => ({
@@ -68,7 +67,7 @@ function Main() {
         tooggleLanguge={true}
         onTooggleLanguage={onTooggleLanguage}
         langValue={langValue}
-        refTooggle={tooggleBtn}
+        refBtn={ref}
       />
       <BasketTool
         onOpen={callbacks.openModalBasket}

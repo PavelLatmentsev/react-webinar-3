@@ -2,10 +2,10 @@ import { memo } from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 import { cn as bem } from "@bem-react/classname";
+import ButtonLanguage from "../button-language";
 
-function Head(props) {
+export function Head(props) {
   const cn = bem("Head");
-
   return (
     <div className={cn()}>
       <h1>{props.title}</h1>
@@ -16,15 +16,11 @@ function Head(props) {
           ) : (
             <span className={cn("tooggleTitle")}>ru</span>
           )}
-          <label className="switch">
-            <input
-              type="checkbox"
-              className="Head-btn"
-              onClick={() => props.onTooggleLanguage("eng")}
-              ref={props.refTooggle}
-            />
-            <span className="slider"></span>
-          </label>
+          <ButtonLanguage
+            onTooggleLanguage={props.onTooggleLanguage}
+            ref={props.refBtn}
+            type={props.type}
+          />
         </div>
       )}
     </div>
