@@ -84,6 +84,9 @@ function Main() {
         main={select.lang.main}
         empty={select.lang.empty}
         go={select.lang.go}
+        productOne={select.lang.productOne}
+        productsFew={select.lang.productsFew}
+        productsMany={select.lang.productsMany}
       />
       <List list={select.list} renderItem={renders.item} />
       <PaginationList count={select.count} />

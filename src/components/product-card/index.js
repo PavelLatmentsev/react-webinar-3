@@ -77,6 +77,9 @@ function ProductCard() {
         main={lang.main}
         empty={lang.empty}
         go={lang.go}
+        productOne={lang.productOne}
+        productsFew={lang.productsFew}
+        productsMany={lang.productsMany}
       />
       <ItemCard
         description={currentProduct.description}

@@ -19,6 +19,9 @@ class Language extends StoreModule {
         category: "Category",
         manufactured: "Manufactured",
         price: "Price",
+        productOne: "Product",
+        productsFew: "Products",
+        productsMany: "Products",
       },
       rus: {
         header: "Магазин",
@@ -35,6 +38,9 @@ class Language extends StoreModule {
         category: "Категория",
         manufactured: "Год выпуска",
         price: "Цена",
+        productOne: "Товар",
+        productsFew: "Товара",
+        productsMany: "Товаров",
       },
     };
   }
