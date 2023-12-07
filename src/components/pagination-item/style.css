@@ -1,0 +1,16 @@
+.PaginationItem-btn {
+  min-width: 20px;
+  min-height: 20px;
+  background: #fff;
+  cursor: pointer;
+  border: none;
+}
+
+.PaginationItem-btn:hover {
+  background-color: #e1e1e1;
+}
+
+.active {
+  background-color: #0087e9;
+  color: #fff;
+}

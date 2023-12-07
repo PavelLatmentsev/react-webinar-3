@@ -19,3 +19,7 @@
   font-weight: 400;
   text-decoration-line: underline;
 }
+.BasketTool-btn {
+  min-width: 75px;
+  min-height: 21px;
+}

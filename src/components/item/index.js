@@ -7,21 +7,19 @@ import { Link } from "react-router-dom";
 
 function Item(props) {
   const cn = bem("Item");
-
   const callbacks = {
     onAdd: (e) => props.onAdd(props.item._id),
   };
 
   return (
     <div className={cn()}>
-      {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <Link to={`/product/${props.item._id}`} className={cn("title")}>
         {props.item.title}
       </Link>
       <div className={cn("actions")}>
         <div className={cn("price")}>{numberFormat(props.item.price)} ₽</div>
         <button onClick={callbacks.onAdd} className={cn("btn")}>
-          Добавить
+          {props.add}
         </button>
       </div>
     </div>
@@ -35,10 +33,12 @@ Item.propTypes = {
     price: PropTypes.number,
   }).isRequired,
   onAdd: PropTypes.func,
+  add: PropTypes.string,
 };
 
 Item.defaultProps = {
   onAdd: () => {},
+  add: "Добавить",
 };
 
 export default memo(Item);

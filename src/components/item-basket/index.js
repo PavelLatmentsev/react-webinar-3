@@ -21,7 +21,9 @@ function ItemBasket(props) {
           {numberFormat(props.item.amount || 0)} шт
         </div>
         <div className={cn("cell")}>
-          <button onClick={callbacks.onRemove}>Удалить</button>
+          <button className={cn("btn")} onClick={callbacks.onRemove}>
+            {props.delete}
+          </button>
         </div>
       </div>
     </div>
@@ -36,10 +38,12 @@ ItemBasket.propTypes = {
     amount: PropTypes.number,
   }).isRequired,
   onRemove: propTypes.func,
+  delete: PropTypes.string,
 };
 
 ItemBasket.defaultProps = {
   onRemove: () => {},
+  delete: "Удалить",
 };
 
 export default memo(ItemBasket);

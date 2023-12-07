@@ -14,20 +14,20 @@ function ItemCard(props) {
     <div className={cn()}>
       <div className={cn("description")}>{props.description}</div>
       <div className={cn("country")}>
-        Страна производитель: <span>{`${props.madeIn} (${props.code})`}</span>
+        {props.countryTitle}: <span>{`${props.madeIn} (${props.code})`}</span>
       </div>
       <div className={cn("category")}>
-        Категория: <span>{props.category}</span>
+        {props.categoryTitle}: <span>{props.category}</span>
       </div>
       <div className={cn("year")}>
-        Год выпуска: <span>{props.edition}</span>{" "}
+        {props.manufacturedTitle}: <span>{props.edition}</span>{" "}
       </div>
       <div className={cn("price")}>
         {" "}
-        Цена: <span>{numberFormat(props.price)}</span>{" "}
+        {props.priceTitle}: <span>{numberFormat(props.price)}</span>{" "}
       </div>
       <button className={cn("btn")} onClick={callbacks.onAdd}>
-        Добавить
+        {props.addTitle}
       </button>
     </div>
   );
@@ -41,6 +41,11 @@ ItemCard.propTypes = {
   code: PropTypes.string.isRequired,
   onAddToBasket: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  countryTitle: PropTypes.string.isRequired,
+  categoryTitle: PropTypes.string.isRequired,
+  manufacturedTitle: PropTypes.string.isRequired,
+  priceTitle: PropTypes.string.isRequired,
+  addTitle: PropTypes.string.isRequired,
 };
 
 export default memo(ItemCard);

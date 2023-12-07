@@ -46,3 +46,7 @@
 .Item-title {
   cursor: pointer;
 }
+.Item-btn {
+  min-width: 71px;
+  min-height: 21px;
+}
