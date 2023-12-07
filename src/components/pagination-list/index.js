@@ -20,7 +20,7 @@ function PaginationList(props) {
     if (page < 3 && page >= 2) {
       setPageQty(paginationBox.slice(page - 1, page + 2));
     } else if (page === 1) {
-      setPageQty(paginationBox.slice(page, page + 3));
+      setPageQty(paginationBox.slice(page, page + 2));
     } else if (page === props.count) {
       setPageQty(paginationBox.slice(page - 3, page + 1));
     } else {

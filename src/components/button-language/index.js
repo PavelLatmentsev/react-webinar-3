@@ -1,17 +1,18 @@
-import { forwardRef } from "react";
 import "./style.css";
-const ButtonLanguage = forwardRef(function MyInput(props, ref) {
+export const ButtonLanguage = (props) => {
+  const heandleChange = () => {
+    props.onTooggleLanguage({ name: props.name, value: !props.value });
+  };
   return (
     <label className="switch">
       <input
         className="Head-btn"
-        onClick={() => props.onTooggleLanguage()}
-        ref={ref}
+        onChange={heandleChange}
         type={props.type}
+        name={props.name}
+        checked={props.value}
       />
       <span className="slider"></span>
     </label>
   );
-});
-
-export default ButtonLanguage;
+};

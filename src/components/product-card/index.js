@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState, useRef } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import Head from "../head";
 import BasketTool from "../basket-tool";
 import ItemCard from "../item-card";
@@ -11,20 +11,30 @@ import "./style.css";
 function ProductCard() {
   const { id } = useParams();
   const store = useStore();
-  const ref = useRef(null);
-  const [language, setLanguage] = useState();
+  const [langChecked, setLangChecked] = useState({ checked: false });
+
   useEffect(() => {
     store.actions.catalog.loadById(id);
     store.actions.modals.open(null);
-    setLanguage(JSON.parse(localStorage.getItem("langValue")));
+    setLangChecked((prevState) => ({
+      ...prevState,
+      checked: JSON.parse(localStorage.getItem("langValue")),
+    }));
   }, [id]);
   useEffect(() => {
-    store.actions.language.getLanguage(language);
-    console.log(ref.current);
-  }, [language]);
-  const onTooggleLanguage = () => {
-    setLanguage((prevState) => !prevState);
-    localStorage.setItem("langValue", !language);
+    store.actions.language.getLanguage(
+      JSON.parse(localStorage.getItem("langValue"))
+    );
+  }, [langChecked]);
+
+  const heandleChange = (target) => {
+    if (target) {
+      setLangChecked((prevState) => ({
+        ...prevState,
+        [target.name]: target.value,
+      }));
+    }
+    localStorage.setItem("langValue", target.value);
   };
   const callbacks = {
     // Добавление в корзину
@@ -53,9 +63,11 @@ function ProductCard() {
       <Head
         title={currentProduct.title}
         tooggleLanguge={true}
-        langValue={language}
-        onTooggleLanguage={onTooggleLanguage}
-        refBtn={ref}
+        onTooggleLanguage={heandleChange}
+        langValue={langChecked.checked}
+        type="checkbox"
+        value={Boolean(langChecked.checked)}
+        name="checked"
       />
       <BasketTool
         onOpen={callbacks.openModalBasket}

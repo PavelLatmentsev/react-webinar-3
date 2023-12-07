@@ -2,9 +2,9 @@ import { memo } from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 import { cn as bem } from "@bem-react/classname";
-import ButtonLanguage from "../button-language";
+import { ButtonLanguage } from "../button-language";
 
-export function Head(props) {
+function Head(props) {
   const cn = bem("Head");
   return (
     <div className={cn()}>
@@ -18,8 +18,10 @@ export function Head(props) {
           )}
           <ButtonLanguage
             onTooggleLanguage={props.onTooggleLanguage}
-            ref={props.refBtn}
+            // ref={props.refBtn}
             type={props.type}
+            name={props.name}
+            value={props.value}
           />
         </div>
       )}

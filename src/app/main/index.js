@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
@@ -10,17 +10,17 @@ import PaginationList from "../../components/pagination-list";
 
 function Main() {
   const store = useStore();
-  const [langValue, setLangValue] = useState(false);
-  const ref = useRef(null);
-
+  const [langChecked, setLangChecked] = useState({ checked: false });
   useEffect(() => {
     store.actions.catalog.load();
-    setLangValue(JSON.parse(localStorage.getItem("langValue")));
+    setLangChecked((prevState) => ({
+      ...prevState,
+      checked: JSON.parse(localStorage.getItem("langValue")),
+    }));
   }, []);
   useEffect(() => {
-    store.actions.language.getLanguage(langValue);
-    ref.current.checked = langValue;
-  }, [langValue]);
+    store.actions.language.getLanguage(Boolean(langChecked.checked));
+  }, [langChecked.checked]);
 
   const select = useSelector((state) => ({
     list: state.catalog.list,
@@ -29,9 +29,14 @@ function Main() {
     count: state.catalog.count,
     lang: state.language.lang,
   }));
-  const onTooggleLanguage = () => {
-    setLangValue((prevState) => !prevState);
-    localStorage.setItem("langValue", !langValue);
+  const heandleChange = (target) => {
+    if (target) {
+      setLangChecked((prevState) => ({
+        ...prevState,
+        [target.name]: target.value,
+      }));
+    }
+    localStorage.setItem("langValue", target.value);
   };
   const callbacks = {
     // Добавление в корзину
@@ -65,9 +70,11 @@ function Main() {
       <Head
         title={select.lang.header}
         tooggleLanguge={true}
-        onTooggleLanguage={onTooggleLanguage}
-        langValue={langValue}
-        refBtn={ref}
+        onTooggleLanguage={heandleChange}
+        langValue={langChecked.checked}
+        type="checkbox"
+        value={Boolean(langChecked.checked)}
+        name="checked"
       />
       <BasketTool
         onOpen={callbacks.openModalBasket}
