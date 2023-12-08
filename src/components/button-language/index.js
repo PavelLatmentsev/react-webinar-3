@@ -1,5 +1,7 @@
+import PropTypes from "prop-types";
+import { memo } from "react";
 import "./style.css";
-export const ButtonLanguage = (props) => {
+function ButtonLanguage(props) {
   const heandleChange = () => {
     props.onTooggleLanguage({ name: props.name, value: !props.value });
   };
@@ -15,4 +17,13 @@ export const ButtonLanguage = (props) => {
       <span className="slider"></span>
     </label>
   );
+}
+
+ButtonLanguage.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
+  onTooggleLanguage: PropTypes.func.isRequired,
 };
+
+export default memo(ButtonLanguage);

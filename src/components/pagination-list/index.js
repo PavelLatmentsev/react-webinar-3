@@ -65,6 +65,6 @@ function PaginationList(props) {
   );
 }
 PaginationList.propTypes = {
-  count: PropTypes.number,
+  count: PropTypes.number.isRequired,
 };
 export default memo(PaginationList);

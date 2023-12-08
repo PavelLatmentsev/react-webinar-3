@@ -2,7 +2,7 @@ import { memo } from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 import { cn as bem } from "@bem-react/classname";
-import { ButtonLanguage } from "../button-language";
+import ButtonLanguage from "../button-language";
 
 function Head(props) {
   const cn = bem("Head");
@@ -29,7 +29,7 @@ function Head(props) {
 }
 
 Head.propTypes = {
-  title: PropTypes.node,
+  title: PropTypes.string,
   onToogleLanguge: PropTypes.func,
   langValue: PropTypes.bool,
   tooggleLanguge: PropTypes.bool,
