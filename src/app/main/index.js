@@ -11,6 +11,7 @@ import PaginationList from "../../components/pagination-list";
 function Main() {
   const store = useStore();
   const [langChecked, setLangChecked] = useState({ checked: false });
+
   useEffect(() => {
     store.actions.catalog.load();
     setLangChecked((prevState) => ({
@@ -29,6 +30,7 @@ function Main() {
     count: state.catalog.count,
     lang: state.language.lang,
   }));
+
   const heandleChange = (target) => {
     if (target) {
       setLangChecked((prevState) => ({
@@ -38,6 +40,7 @@ function Main() {
     }
     localStorage.setItem("langValue", target.value);
   };
+
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(
@@ -50,6 +53,7 @@ function Main() {
       [store]
     ),
   };
+
   const renders = {
     item: useCallback(
       (item) => {

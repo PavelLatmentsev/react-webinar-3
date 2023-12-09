@@ -5,14 +5,22 @@
   margin-right: 21px;
   margin-top: 22px;
   color: #000;
-  font-size: 16px;
   background-color: #fff;
 }
 .Pagination-start,
-.Pagination-end {
+.Pagination-end,
+.Pagination-separate {
   background-color: #fff;
   border: none;
   cursor: pointer;
+  color: #000;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  box-sizing: border-box;
+  min-width: 20px;
+  min-height: 20px;
+  padding: 0;
 }
 .Pagination-start:hover,
 .Pagination-end:hover {
@@ -21,4 +29,7 @@
 .active {
   background-color: #0087e9;
   color: #fff;
+}
+.Pagination-separate {
+  color: #cccccc;
 }

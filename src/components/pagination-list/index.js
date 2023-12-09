@@ -39,7 +39,7 @@ function PaginationList(props) {
         >
           1
         </button>
-        {currentPage > 3 && <button className={cn("start")}>...</button>}
+        {currentPage > 3 && <button className={cn("separate")}>...</button>}
         {pageQty.map((item) => {
           return (
             <PaginationItem
@@ -52,7 +52,7 @@ function PaginationList(props) {
           );
         })}
         {currentPage < props.count - 2 && (
-          <button className={cn("end")}>...</button>
+          <button className={cn("separate")}>...</button>
         )}
         <button
           className={cn(currentPage === props.count ? "end active" : "end")}

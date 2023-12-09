@@ -1,12 +1,12 @@
 import { memo, useCallback, useEffect, useState } from "react";
-import Head from "../head";
-import BasketTool from "../basket-tool";
-import ItemCard from "../item-card";
-import PageLayout from "../page-layout";
+import Head from "../../components/head";
+import BasketTool from "../../components/basket-tool";
+import ItemCard from "../../components/item-card";
+import PageLayout from "../../components/page-layout";
 import { useParams } from "react-router-dom";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-import Loader from "../loader";
+import Loader from "../../components/loader";
 import "./style.css";
 function ProductCard() {
   const { id } = useParams();

@@ -8,7 +8,7 @@ import {
   Route,
 } from "react-router-dom";
 import NotFound from "../components/not-found";
-import ProductCard from "../components/product-card";
+import ProductCard from "./product-card";
 /**
  * Приложение
  * @returns {React.ReactElement}
