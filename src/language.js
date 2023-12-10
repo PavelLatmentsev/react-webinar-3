@@ -1,10 +1,5 @@
-import StoreModule from "../module";
-
-class Language extends StoreModule {
-  initState() {
-    return {
-      lang: {},
-      eng: {
+export const dictionary = {
+    eng: {
         header: "Store",
         add: "Add",
         delete: "Delete",
@@ -22,8 +17,8 @@ class Language extends StoreModule {
         productOne: "Product",
         productsFew: "Products",
         productsMany: "Products",
-      },
-      rus: {
+    },
+    rus: {
         header: "Магазин",
         add: "Добавить",
         delete: "Удалить",
@@ -41,19 +36,5 @@ class Language extends StoreModule {
         productOne: "Товар",
         productsFew: "Товара",
         productsMany: "Товаров",
-      },
-    };
-  }
-
-  getLanguage(language) {
-    this.setState(
-      {
-        ...this.getState(),
-        lang: language ? this.getState().eng : this.getState().rus,
-      },
-      "Установлен Язык"
-    );
-  }
+    },
 }
-
-export default Language;

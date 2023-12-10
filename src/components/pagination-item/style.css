@@ -1,18 +1,17 @@
 .PaginationItem-btn {
+  padding: 0;
   min-width: 20px;
-  min-height: 20px;
+  height: 20px;
   background: #fff;
   cursor: pointer;
   border: none;
   color: #000000;
-  box-sizing: border-box;
-  color: #000;
   text-align: center;
-  font-family: Arial;
   font-size: 16px;
   font-weight: 400;
-  line-height: normal;
-  padding: 0;
+  line-height: 18.4px;
+  padding: 0 2px;
+  outline: none;
 }
 
 .PaginationItem-btn:hover {

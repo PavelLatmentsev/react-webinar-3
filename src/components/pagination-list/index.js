@@ -18,7 +18,7 @@ function PaginationList(props) {
   const getPage = (page, paginationBox) => {
     store.actions.catalog.load(page);
     if (page < 3 && page >= 2) {
-      setPageQty(paginationBox.slice(page - 1, page + 2));
+      setPageQty(paginationBox.slice(page - 1, page + 1));
     } else if (page === 1) {
       setPageQty(paginationBox.slice(page, page + 2));
     } else if (page === props.count) {

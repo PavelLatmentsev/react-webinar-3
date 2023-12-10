@@ -5,15 +5,14 @@ import ModalLayout from "../../components/modal-layout";
 import BasketTotal from "../../components/basket-total";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
-
+import { dictionary } from "../../language";
 function Basket() {
   const store = useStore();
-
+  const lang = JSON.parse(localStorage.getItem("langValue")) ? dictionary.eng : dictionary.rus;
   const select = useSelector((state) => ({
     list: state.basket.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
-    lang: state.language.lang,
   }));
   const callbacks = {
     // Удаление из корзины
@@ -32,7 +31,7 @@ function Basket() {
           <ItemBasket
             item={item}
             onRemove={callbacks.removeFromBasket}
-            delete={select.lang.delete}
+            delete={lang.delete}
           />
         );
       },
@@ -42,12 +41,12 @@ function Basket() {
 
   return (
     <ModalLayout
-      title={select.lang.cart}
+      title={lang.cart}
       onClose={callbacks.closeModal}
-      btnTitleClose={select.lang.close}
+      btnTitleClose={lang.close}
     >
       <List list={select.list} renderItem={renders.itemBasket} />
-      <BasketTotal sum={select.sum} totalPrice={select.lang.totalPrice} />
+      <BasketTotal sum={select.sum} totalPrice={lang.totalPrice} />
     </ModalLayout>
   );
 }

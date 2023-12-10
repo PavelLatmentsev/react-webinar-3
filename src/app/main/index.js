@@ -7,11 +7,11 @@ import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import PaginationList from "../../components/pagination-list";
-
+import { dictionary } from "../../language";
 function Main() {
   const store = useStore();
   const [langChecked, setLangChecked] = useState({ checked: false });
-
+  const lang = langChecked.checked ? dictionary.eng : dictionary.rus
   useEffect(() => {
     store.actions.catalog.load();
     setLangChecked((prevState) => ({
@@ -19,16 +19,12 @@ function Main() {
       checked: JSON.parse(localStorage.getItem("langValue")),
     }));
   }, []);
-  useEffect(() => {
-    store.actions.language.getLanguage(Boolean(langChecked.checked));
-  }, [langChecked.checked]);
 
   const select = useSelector((state) => ({
     list: state.catalog.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
     count: state.catalog.count,
-    lang: state.language.lang,
   }));
 
   const heandleChange = (target) => {
@@ -61,18 +57,17 @@ function Main() {
           <Item
             item={item}
             onAdd={callbacks.addToBasket}
-            add={select.lang.add}
+            add={lang.add}
           />
         );
       },
-      [callbacks.addToBasket, select.lang.add]
+      [callbacks.addToBasket, lang.add]
     ),
   };
-
   return (
     <PageLayout>
       <Head
-        title={select.lang.header}
+        title={lang.header}
         tooggleLanguge={true}
         onTooggleLanguage={heandleChange}
         langValue={langChecked.checked}
@@ -84,13 +79,13 @@ function Main() {
         onOpen={callbacks.openModalBasket}
         amount={select.amount}
         sum={select.sum}
-        basket={select.lang.basket}
-        main={select.lang.main}
-        empty={select.lang.empty}
-        go={select.lang.go}
-        productOne={select.lang.productOne}
-        productsFew={select.lang.productsFew}
-        productsMany={select.lang.productsMany}
+        basket={lang.basket}
+        main={lang.main}
+        empty={lang.empty}
+        go={lang.go}
+        productOne={lang.productOne}
+        productsFew={lang.productsFew}
+        productsMany={lang.productsMany}
       />
       <List list={select.list} renderItem={renders.item} />
       <PaginationList count={select.count} />

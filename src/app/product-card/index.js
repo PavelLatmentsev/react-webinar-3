@@ -7,11 +7,13 @@ import { useParams } from "react-router-dom";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Loader from "../../components/loader";
+import { dictionary } from "../../language";
 import "./style.css";
 function ProductCard() {
   const { id } = useParams();
   const store = useStore();
   const [langChecked, setLangChecked] = useState({ checked: false });
+  const lang = langChecked.checked ? dictionary.eng : dictionary.rus
 
   useEffect(() => {
     store.actions.catalog.loadById(id);
@@ -21,11 +23,6 @@ function ProductCard() {
       checked: JSON.parse(localStorage.getItem("langValue")),
     }));
   }, [id]);
-  useEffect(() => {
-    store.actions.language.getLanguage(
-      JSON.parse(localStorage.getItem("langValue"))
-    );
-  }, [langChecked]);
 
   const heandleChange = (target) => {
     if (target) {
@@ -48,16 +45,18 @@ function ProductCard() {
       [store]
     ),
   };
-  const { isLoading, currentProduct, error, amount, sum, lang } = useSelector(
+  const { isLoading, currentProduct, error, amount, sum } = useSelector(
     (state) => ({
       isLoading: state.catalog.isLoading,
       currentProduct: state.catalog.currentProduct,
       error: state.catalog.error,
       amount: state.basket.amount,
       sum: state.basket.sum,
-      lang: state.language.lang,
+      // lang: state.language.lang,
     })
   );
+
+  console.log(lang)
   return isLoading ? (
     <PageLayout>
       <Head
