@@ -84,7 +84,6 @@ function Main() {
           amount={select.amount}
           sum={select.sum}
           basket={lang.basket}
-          main={lang.main}
           empty={lang.empty}
           go={lang.go}
           productOne={lang.productOne}

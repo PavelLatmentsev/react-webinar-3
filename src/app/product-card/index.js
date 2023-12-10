@@ -18,7 +18,7 @@ function ProductCard() {
   const lang = langChecked.checked ? dictionary.eng : dictionary.rus
 
   useEffect(() => {
-    store.actions.catalog.loadById(id);
+    store.actions.product.loadById(id);
     store.actions.modals.open(null);
     setLangChecked((prevState) => ({
       ...prevState,
@@ -49,9 +49,9 @@ function ProductCard() {
   };
   const { isLoading, currentProduct, error, amount, sum } = useSelector(
     (state) => ({
-      isLoading: state.catalog.isLoading,
-      currentProduct: state.catalog.currentProduct,
-      error: state.catalog.error,
+      isLoading: state.product.isLoading,
+      currentProduct: state.product.currentProduct,
+      error: state.product.error,
       amount: state.basket.amount,
       sum: state.basket.sum,
     })
