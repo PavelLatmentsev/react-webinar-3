@@ -8,6 +8,8 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Loader from "../../components/loader";
 import { dictionary } from "../../language";
+import NavigationMenu from "../../components/menu"
+import PositionLayout from "../../components/position-layout";
 import "./style.css";
 function ProductCard() {
   const { id } = useParams();
@@ -52,11 +54,9 @@ function ProductCard() {
       error: state.catalog.error,
       amount: state.basket.amount,
       sum: state.basket.sum,
-      // lang: state.language.lang,
     })
   );
 
-  console.log(lang)
   return isLoading ? (
     <PageLayout>
       <Head
@@ -68,18 +68,20 @@ function ProductCard() {
         value={Boolean(langChecked.checked)}
         name="checked"
       />
-      <BasketTool
-        onOpen={callbacks.openModalBasket}
-        amount={amount}
-        sum={sum}
-        basket={lang.basket}
-        main={lang.main}
-        empty={lang.empty}
-        go={lang.go}
-        productOne={lang.productOne}
-        productsFew={lang.productsFew}
-        productsMany={lang.productsMany}
-      />
+      <PositionLayout>
+        <NavigationMenu name={lang.main} path="/" />
+        <BasketTool
+          onOpen={callbacks.openModalBasket}
+          amount={amount}
+          sum={sum}
+          basket={lang.basket}
+          empty={lang.empty}
+          go={lang.go}
+          productOne={lang.productOne}
+          productsFew={lang.productsFew}
+          productsMany={lang.productsMany}
+        />
+      </PositionLayout>
       <ItemCard
         description={currentProduct.description}
         madeIn={currentProduct.madeIn.title}

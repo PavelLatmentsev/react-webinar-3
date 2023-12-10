@@ -1,0 +1,12 @@
+.Navigation-item {
+  color: #0087e9;
+  font-size: 18px;
+  font-weight: 400;
+  text-decoration-line: underline;
+  padding: 20px;
+}
+.Navigation-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}

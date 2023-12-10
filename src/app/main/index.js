@@ -8,6 +8,8 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import PaginationList from "../../components/pagination-list";
 import { dictionary } from "../../language";
+import NavigationMenu from "../../components/menu"
+import PositionLayout from "../../components/position-layout";
 function Main() {
   const store = useStore();
   const [langChecked, setLangChecked] = useState({ checked: false });
@@ -75,18 +77,21 @@ function Main() {
         value={Boolean(langChecked.checked)}
         name="checked"
       />
-      <BasketTool
-        onOpen={callbacks.openModalBasket}
-        amount={select.amount}
-        sum={select.sum}
-        basket={lang.basket}
-        main={lang.main}
-        empty={lang.empty}
-        go={lang.go}
-        productOne={lang.productOne}
-        productsFew={lang.productsFew}
-        productsMany={lang.productsMany}
-      />
+      <PositionLayout>
+        <NavigationMenu name={lang.main} path="/" />
+        <BasketTool
+          onOpen={callbacks.openModalBasket}
+          amount={select.amount}
+          sum={select.sum}
+          basket={lang.basket}
+          main={lang.main}
+          empty={lang.empty}
+          go={lang.go}
+          productOne={lang.productOne}
+          productsFew={lang.productsFew}
+          productsMany={lang.productsMany}
+        />
+      </PositionLayout>
       <List list={select.list} renderItem={renders.item} />
       <PaginationList count={select.count} />
     </PageLayout>
