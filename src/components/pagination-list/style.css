@@ -19,8 +19,9 @@
   min-width: 20px;
   height: 20px;
   padding: 0;
-  padding: 0 2px;
+  padding: 2px 2px;
   outline: none;
+  line-height: 0;
 }
 .Pagination-start:hover,
 .Pagination-end:hover {
