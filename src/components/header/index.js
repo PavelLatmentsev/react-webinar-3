@@ -9,9 +9,9 @@ function Header(props) {
 
   return (
     <div className={cn()}>
-      {props.isAuth && (
+      {props.isAuth && props.user && (
         <Link to="/profile" className={cn("link")}>
-          User №1
+          {props.user.profile.name}
         </Link>
       )}
       <button

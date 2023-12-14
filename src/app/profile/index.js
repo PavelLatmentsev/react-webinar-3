@@ -43,6 +43,7 @@ function Profile() {
           isAuth={select.isAuth}
           onLogout={callbacks.onLogout}
           onRedirect={callbacks.onRedirect}
+          user={select.user}
         />
         <Head title={t("title")}>
           <LocaleSelect />
