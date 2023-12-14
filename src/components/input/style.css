@@ -6,3 +6,25 @@
 .Input_theme_big {
   width: 300px;
 }
+
+.Input-label {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+.Input_theme_login {
+  height: 26px;
+  width: 203px;
+  border-radius: 1px;
+  border: 1px solid #767676;
+  background: #fff;
+  margin-bottom: 20px;
+  outline: none;
+  color: #000;
+  font-family: Arial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

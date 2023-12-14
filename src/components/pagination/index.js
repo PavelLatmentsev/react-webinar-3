@@ -1,10 +1,9 @@
-import {memo} from 'react';
+import { memo } from "react";
 import PropTypes from "prop-types";
-import {cn as bem} from '@bem-react/classname'
-import './style.css';
+import { cn as bem } from "@bem-react/classname";
+import "./style.css";
 
 function Pagination(props) {
-
   // Количество страниц
   const length = Math.ceil(props.count / Math.max(props.limit, 1));
 
@@ -28,30 +27,37 @@ function Pagination(props) {
   if (right < length) items.push(length);
 
   const onClickHandler = (number) => (e) => {
-    if (props.onChange) {
+    if (props.onChange && number) {
       e.preventDefault();
       props.onChange(number);
     }
-  }
+  };
 
-  const cn = bem('Pagination');
+  const cn = bem("Pagination");
   return (
     <ul className={cn()}>
       {items.map((number, index) => (
-        <li key={index}
-            className={cn('item', {active: number === props.page, split: !number})}
-            onClick={onClickHandler(number)}>
-          {number
-            ? (props.makeLink
-                ? <a href={props.makeLink(number)}>{number}</a>
-                : number
+        <li
+          key={index}
+          className={cn("item", {
+            active: number === props.page,
+            split: !number,
+          })}
+          onClick={onClickHandler(number)}
+        >
+          {number ? (
+            props.makeLink ? (
+              <a href={props.makeLink(number)}>{number}</a>
+            ) : (
+              number
             )
-            : '...'
-          }
+          ) : (
+            "..."
+          )}
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 Pagination.propTypes = {
@@ -61,13 +67,13 @@ Pagination.propTypes = {
   indent: PropTypes.number,
   onChange: PropTypes.func,
   makeLink: PropTypes.func,
-}
+};
 
 Pagination.defaultProps = {
   page: 1,
   limit: 10,
   count: 1000,
   indent: 1,
-}
+};
 
 export default memo(Pagination);

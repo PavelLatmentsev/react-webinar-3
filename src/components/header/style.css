@@ -1,0 +1,24 @@
+.Header {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 41px;
+  border-bottom: 1px solid #dcdcdc;
+  background: #fff;
+  align-items: center;
+  gap: 20px;
+}
+
+.Header-btn {
+  padding: 3px;
+  min-width: 47px;
+  margin: 10px 20px 10px 0;
+  cursor: pointer;
+}
+.Header-link {
+  color: #0087e9;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+}
