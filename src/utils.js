@@ -34,6 +34,23 @@ export function numberFormat(value, locale = "ru-RU", options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
 
+export function transformData(array, parent = null, separate = " ") {
+  let category = [];
+  for (let item of array) {
+    if (
+      (item.parent && item.parent._id === parent) ||
+      (item.parent === null && parent === null)
+    ) {
+      category.push({
+        ...item,
+        value: item._id,
+        title: `${separate}${item.title}`,
+      });
+      category.push(...transformData(array, item._id, `-${separate}`));
+    }
+  }
+  return category;
+}
 export function transformQuery(data) {
   const query = data.value;
   return query;

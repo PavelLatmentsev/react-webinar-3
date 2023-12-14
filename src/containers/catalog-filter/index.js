@@ -6,7 +6,7 @@ import Select from "../../components/select";
 import Input from "../../components/input";
 import SideLayout from "../../components/side-layout";
 import Spinner from "../../components/spinner";
-import { transformData, transformQuery } from "../../utils";
+import { transformQuery, transformData } from "../../utils";
 
 /**
  * Контейнер со всеми фильтрами каталога
@@ -57,9 +57,16 @@ function CatalogFilter() {
     ),
     categoryList: useMemo(() => select.categoryList, [select.categoryList]),
   };
-
+  console.log(options.categoryList);
   const { t } = useTranslate();
-  const transformCategory = transformData(options.categoryList);
+  const transformCategory = [
+    {
+      title: "Все",
+      value: options.categoryList.map((item) => item._id),
+    },
+    ...transformData(options.categoryList),
+  ];
+  console.log(options.categoryList.map((item) => item._id));
   return (
     <Spinner active={select.waiting}>
       <SideLayout padding="medium">

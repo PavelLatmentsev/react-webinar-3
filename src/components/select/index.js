@@ -4,6 +4,7 @@ import "./style.css";
 
 function Select(props) {
   const onSelect = (e) => {
+    console.log(e.target.value);
     props.onChange(e.target.value);
   };
 

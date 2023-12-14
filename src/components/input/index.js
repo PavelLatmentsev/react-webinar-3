@@ -11,7 +11,7 @@ function Input(props) {
   const onChangeDebounce = useCallback(
     debounce(
       (value) => props.onChange({ value: value, name: props.name }),
-      600
+      300
     ),
 
     [(props.onChange, props.name)]
