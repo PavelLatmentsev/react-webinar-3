@@ -1,3 +1,5 @@
+import { array } from "prop-types";
+
 /**
  * Плюрализация
  * Возвращает вариант с учётом правил множественного числа под указанную локаль
@@ -46,7 +48,7 @@ export function transformData(array, parent = null, separate = " ") {
         value: item._id,
         title: `${separate}${item.title}`,
       });
-      category.push(...transformData(array, item._id, `-${separate}`));
+      category.push(...transformData(array, item._id, `- ${separate}`));
     }
   }
   return category;
