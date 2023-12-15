@@ -57,16 +57,14 @@ function CatalogFilter() {
     ),
     categoryList: useMemo(() => select.categoryList, [select.categoryList]),
   };
-  console.log(options.categoryList);
   const { t } = useTranslate();
   const transformCategory = [
     {
       title: "Все",
-      value: options.categoryList.map((item) => item._id),
+      value: "",
     },
     ...transformData(options.categoryList),
   ];
-  console.log(options.categoryList.map((item) => item._id));
   return (
     <Spinner active={select.waiting}>
       <SideLayout padding="medium">

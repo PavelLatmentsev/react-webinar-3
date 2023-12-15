@@ -96,6 +96,12 @@ class CatalogState extends StoreModule {
       "search[category]": params.category,
     };
 
+    for (let param in apiParams) {
+      if (!apiParams[param]) {
+        delete apiParams[param];
+      }
+    }
+
     const response = await fetch(
       `/api/v1/articles?${new URLSearchParams(apiParams)}`
     );
