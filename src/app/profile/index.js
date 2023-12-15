@@ -13,12 +13,14 @@ import { useNavigate } from "react-router-dom";
 function Profile() {
   const store = useStore();
   const navigate = useNavigate();
+  const isAuth = Boolean(localStorage.getItem("isAuth")); //для  того что бы зайти напрямую прописав /profile в браузере.
   const callbacks = {
     onLogout: useCallback(async () => {
       await store.actions.auth.logOut();
+      navigate("/login", { replace: true });
     }, [store]),
     onRedirect: useCallback(async () => {
-      return navigate("/login", { replace: true });
+      navigate("/login", { replace: true });
     }, [store]),
   };
 
@@ -28,28 +30,27 @@ function Profile() {
     token: state.auth.token,
     waiting: state.auth.waiting,
   }));
-
   useEffect(() => {
     !select.isAuth && store.actions.auth.getAuthUser();
-    !select.isAuth && navigate("/login");
-  }, [select.isAuth]);
-
+  }, [isAuth]);
+  useEffect(() => {
+    !isAuth && navigate("/login");
+  }, []);
   const { t } = useTranslate();
   return (
     <PageLayout>
+      <Header
+        title={!select.isAuth ? t("login") : t("logout")}
+        isAuth={isAuth}
+        onLogout={callbacks.onLogout}
+        onRedirect={callbacks.onRedirect}
+        user={select.user}
+      />
+      <Head title={t("title")}>
+        <LocaleSelect />
+      </Head>
+      <Navigation />
       <Spinner active={select.waiting}>
-        <Header
-          title={!select.isAuth ? t("login") : t("logout")}
-          isAuth={select.isAuth}
-          onLogout={callbacks.onLogout}
-          onRedirect={callbacks.onRedirect}
-          user={select.user}
-        />
-        <Head title={t("title")}>
-          <LocaleSelect />
-        </Head>
-        <Navigation />
-
         <UserProfile
           user={select.user}
           title={t("profile")}

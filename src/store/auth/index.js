@@ -33,8 +33,8 @@ class Auth extends StoreModule {
               ...this.getState(),
               user: json.result.user,
               token: json.result.token,
-              waiting: false,
               isAuth: true,
+              waiting: false,
             },
             "Авторизация"
           );
@@ -46,13 +46,15 @@ class Auth extends StoreModule {
       this.setState({
         ...this.getState(),
         error: error.message,
-        waiting: false,
         isAuth: false,
+        waiting: false,
       });
     }
   }
 
   async logOut() {
+    localStorage.removeItem("x-token");
+    localStorage.removeItem("isAuth");
     this.setState({
       ...this.getState(),
       waiting: true,
@@ -76,16 +78,14 @@ class Auth extends StoreModule {
             },
             "Авторизация"
           );
-          localStorage.removeItem("x-token");
-          localStorage.removeItem("isAuth");
         }
       }
     } catch (error) {
       this.setState({
         ...this.getState(),
         error: error.message,
-        waiting: false,
         isAuth: false,
+        waiting: false,
       });
     }
   }
@@ -114,8 +114,8 @@ class Auth extends StoreModule {
               ...this.getState(),
               user: json.result,
               token: json.result.token,
-              waiting: false,
               isAuth: true,
+              waiting: false,
             },
             "Авторизация"
           );

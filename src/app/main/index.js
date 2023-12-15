@@ -28,6 +28,7 @@ function Main() {
   );
   const select = useSelector((state) => ({
     isAuth: state.auth.isAuth,
+    user: state.auth.user,
   }));
   const callbacks = {
     onLogout: useCallback(async () => {
@@ -47,6 +48,7 @@ function Main() {
         onRedirect={callbacks.onRedirect}
         isAuth={select.isAuth}
         onLogout={callbacks.onLogout}
+        user={select.user}
       ></Header>
       <Head title={t("title")}>
         <LocaleSelect />

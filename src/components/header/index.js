@@ -6,12 +6,11 @@ import { Link } from "react-router-dom";
 
 function Header(props) {
   const cn = bem("Header");
-
   return (
     <div className={cn()}>
-      {props.isAuth && props.user && (
+      {props.isAuth && (
         <Link to="/profile" className={cn("link")}>
-          {props.user.profile.name}
+          {props.user?.profile?.name}
         </Link>
       )}
       <button

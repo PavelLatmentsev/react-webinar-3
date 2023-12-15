@@ -10,11 +10,11 @@ function UserProfile(props) {
       <h1 className={cn("title")}>{props.title}</h1>
       <span className={cn("name")}>
         {props.titleName}:
-        <span className={cn("subtitle")}>{props.user?.profile?.name}</span>
+        <span className={cn("subtitle")}> {props.user?.profile?.name}</span>
       </span>
       <span className={cn("phone")}>
         {props.titlePhone}:
-        <span className={cn("subtitle")}>{props.user?.profile?.phone}</span>
+        <span className={cn("subtitle")}> {props.user?.profile?.phone}</span>
       </span>
       <span className={cn("email")}>
         email: <span className={cn("subtitle")}>{props?.user?.email}</span>
