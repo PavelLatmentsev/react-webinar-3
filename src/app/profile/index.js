@@ -10,10 +10,13 @@ import Navigation from "../../containers/navigation";
 import UserProfile from "../../components/user-profile";
 import Spinner from "../../components/spinner";
 import { useNavigate } from "react-router-dom";
+import useInit from "../../hooks/use-init";
 function Profile() {
   const store = useStore();
   const navigate = useNavigate();
-  const isAuth = Boolean(localStorage.getItem("isAuth")); //для  того что бы зайти напрямую прописав /profile в браузере.
+  useInit(() => {
+    store.actions.profile.getAuthUser();
+  }, []);
   const callbacks = {
     onLogout: useCallback(async () => {
       await store.actions.auth.logOut();
@@ -25,23 +28,20 @@ function Profile() {
   };
 
   const select = useSelector((state) => ({
-    user: state.auth.user,
+    user: state.profile.user,
     isAuth: state.auth.isAuth,
-    token: state.auth.token,
     waiting: state.auth.waiting,
   }));
+  console.log(select.isAuth);
   useEffect(() => {
-    !select.isAuth && store.actions.auth.getAuthUser();
-  }, [isAuth]);
-  useEffect(() => {
-    !isAuth && navigate("/login");
+    !token && navigate("/login");
   }, []);
   const { t } = useTranslate();
   return (
     <PageLayout>
       <Header
         title={!select.isAuth ? t("login") : t("logout")}
-        isAuth={isAuth}
+        isAuth={select.isAuth}
         onLogout={callbacks.onLogout}
         onRedirect={callbacks.onRedirect}
         user={select.user}

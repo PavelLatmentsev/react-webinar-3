@@ -17,7 +17,6 @@ import useSelector from "../../hooks/use-selector";
 function Main() {
   const store = useStore();
   const navigate = useNavigate();
-
   useInit(
     () => {
       store.actions.catalog.initParams();
@@ -28,8 +27,9 @@ function Main() {
   );
   const select = useSelector((state) => ({
     isAuth: state.auth.isAuth,
-    user: state.auth.user,
+    user: state.profile.user,
   }));
+  console.log(select.user);
   const callbacks = {
     onLogout: useCallback(async () => {
       await store.actions.auth.logOut();

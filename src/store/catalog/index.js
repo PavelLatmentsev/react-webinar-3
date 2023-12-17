@@ -46,11 +46,11 @@ class CatalogState extends StoreModule {
     );
   }
 
-  /**
-   * Сброс параметров к начальным
-   * @param [newParams] {Object} Новые параметры
-   * @return {Promise<void>}
-   */
+  // /**
+  //  * Сброс параметров к начальным
+  //  * @param [newParams] {Object} Новые параметры
+  //  * @return {Promise<void>}
+  //  */
   async resetParams(newParams = {}) {
     // Итоговые параметры из начальных, из URL и из переданных явно
     const params = { ...this.initState().params, ...newParams };
@@ -58,12 +58,12 @@ class CatalogState extends StoreModule {
     await this.setParams(params);
   }
 
-  /**
-   * Установка параметров и загрузка списка товаров
-   * @param [newParams] {Object} Новые параметры
-   * @param [replaceHistory] {Boolean} Заменить адрес (true) или новая запись в истории браузера (false)
-   * @returns {Promise<void>}
-   */
+  // /**
+  //  * Установка параметров и загрузка списка товаров
+  //  * @param [newParams] {Object} Новые параметры
+  //  * @param [replaceHistory] {Boolean} Заменить адрес (true) или новая запись в истории браузера (false)
+  //  * @returns {Promise<void>}
+  //  */
   async setParams(newParams = {}, replaceHistory = false) {
     const params = { ...this.getState().params, ...newParams };
 

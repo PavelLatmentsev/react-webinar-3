@@ -3,11 +3,9 @@ import StoreModule from "../module";
 class Auth extends StoreModule {
   initState() {
     return {
-      user: {},
       isAuth: false,
       waiting: false,
       error: "",
-      token: "",
     };
   }
   async login(data) {
@@ -31,15 +29,12 @@ class Auth extends StoreModule {
           this.setState(
             {
               ...this.getState(),
-              user: json.result.user,
-              token: json.result.token,
               isAuth: true,
               waiting: false,
             },
             "Авторизация"
           );
-          localStorage.setItem("x-token", this.getState().token);
-          localStorage.setItem("isAuth", this.getState().isAuth);
+          localStorage.setItem("x-token", json.result.token);
         }
       }
     } catch (error) {
@@ -54,7 +49,6 @@ class Auth extends StoreModule {
 
   async logOut() {
     localStorage.removeItem("x-token");
-    localStorage.removeItem("isAuth");
     this.setState({
       ...this.getState(),
       waiting: true,
@@ -63,7 +57,7 @@ class Auth extends StoreModule {
       const response = await fetch(`api/v1/users/sign`, {
         method: "DELETE",
         headers: {
-          "X-Token": this.getState().token,
+          "X-Token": localStorage.getItem("x-token"),
           "Content-Type": "application/json",
         },
       });
@@ -90,45 +84,11 @@ class Auth extends StoreModule {
     }
   }
 
-  async getAuthUser() {
+  async clearError() {
     this.setState({
       ...this.getState(),
-      token: localStorage.getItem("x-token"),
-      waiting: true,
+      error: "",
     });
-    try {
-      const response = await fetch(`/api/v1/users/self?fields=*`, {
-        method: "GET",
-        headers: {
-          "X-Token": localStorage.getItem("x-token"),
-          "Content-Type": "application/json",
-        },
-      });
-      const json = await response.json();
-      if (!response.ok) {
-        throw new Error(json.error.data.issues[0].message);
-      } else {
-        {
-          this.setState(
-            {
-              ...this.getState(),
-              user: json.result,
-              token: json.result.token,
-              isAuth: true,
-              waiting: false,
-            },
-            "Авторизация"
-          );
-        }
-      }
-    } catch (error) {
-      this.setState({
-        ...this.getState(),
-        error: error.message,
-        waiting: false,
-        isAuth: false,
-      });
-    }
   }
 }
 

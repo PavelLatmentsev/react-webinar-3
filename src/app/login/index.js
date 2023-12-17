@@ -9,18 +9,18 @@ import Header from "../../components/header";
 import LoginForm from "../../components/login-form";
 import Navigation from "../../containers/navigation";
 import { useNavigate } from "react-router-dom";
+import useInit from "../../hooks/use-init";
 function Login() {
   const store = useStore();
   const [login, setLogin] = useState({ login: "", password: "" });
+  useInit(() => {
+    store.actions.auth.clearError();
+  }, []);
   const navigate = useNavigate();
-
   const select = useSelector((state) => ({
-    article: state.auth.user,
     isAuth: state.auth.isAuth,
     error: state.auth.error,
-    token: state.auth.token,
   }));
-
   const heandleChange = (target) => {
     if (target) {
       setLogin((prevState) => ({
@@ -29,9 +29,10 @@ function Login() {
       }));
     }
   };
+
   useEffect(() => {
-    select.token && navigate("/profile");
-  }, [select.token]);
+    select.isAuth && navigate("/profile");
+  }, [select.isAuth]);
 
   const callbacks = {
     onLogin: useCallback(
