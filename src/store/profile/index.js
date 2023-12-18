@@ -9,12 +9,14 @@ class Profile extends StoreModule {
     };
   }
 
-  async getAuthUser() {
+  async loadUser() {
     const token = localStorage.getItem("x-token");
+
     this.setState({
       ...this.getState(),
       waiting: true,
     });
+
     try {
       const response = await fetch(`/api/v1/users/self?fields=*`, {
         method: "GET",
@@ -43,7 +45,6 @@ class Profile extends StoreModule {
         ...this.getState(),
         error: error.message,
         waiting: false,
-        isAuth: false,
       });
     }
   }

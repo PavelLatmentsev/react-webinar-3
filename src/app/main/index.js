@@ -27,9 +27,8 @@ function Main() {
   );
   const select = useSelector((state) => ({
     isAuth: state.auth.isAuth,
-    user: state.profile.user,
+    user: state.auth.user,
   }));
-  console.log(select.user);
   const callbacks = {
     onLogout: useCallback(async () => {
       await store.actions.auth.logOut();

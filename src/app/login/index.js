@@ -29,7 +29,6 @@ function Login() {
       }));
     }
   };
-
   useEffect(() => {
     select.isAuth && navigate("/profile");
   }, [select.isAuth]);

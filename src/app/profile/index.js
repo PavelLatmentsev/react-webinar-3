@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback } from "react";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import useTranslate from "../../hooks/use-translate";
@@ -14,9 +14,11 @@ import useInit from "../../hooks/use-init";
 function Profile() {
   const store = useStore();
   const navigate = useNavigate();
+
   useInit(() => {
-    store.actions.profile.getAuthUser();
+    store.actions.profile.loadUser();
   }, []);
+
   const callbacks = {
     onLogout: useCallback(async () => {
       await store.actions.auth.logOut();
@@ -30,14 +32,12 @@ function Profile() {
   const select = useSelector((state) => ({
     user: state.profile.user,
     isAuth: state.auth.isAuth,
-    waiting: state.auth.waiting,
+    waiting: state.profile.waiting,
   }));
-  console.log(select.isAuth);
-  useEffect(() => {
-    !token && navigate("/login");
-  }, []);
+
   const { t } = useTranslate();
   return (
+
     <PageLayout>
       <Header
         title={!select.isAuth ? t("login") : t("logout")}
@@ -59,6 +59,7 @@ function Profile() {
         />
       </Spinner>
     </PageLayout>
+
   );
 }
 

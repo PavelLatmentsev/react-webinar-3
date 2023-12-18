@@ -30,7 +30,7 @@ function Article() {
     waiting: state.article.waiting,
     isAuth: state.auth.isAuth,
     token: state.auth.token,
-    user: state.profile.user,
+    user: state.auth.user,
   }));
 
   const { t } = useTranslate();
