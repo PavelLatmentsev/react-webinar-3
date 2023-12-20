@@ -1,0 +1,18 @@
+.Textarea {
+  margin: 0;
+  padding: 0;
+  width: 944px;
+  min-height: 76px;
+  margin: 10px 0;
+  border: 1px solid #666;
+  background: #fff;
+  box-shadow: 0px 1px 4px 0px rgba(102, 102, 102, 0.1) inset;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  outline: none;
+  resize: none;
+  padding: 4px 0 0 5px;
+  box-sizing: border-box;
+}

@@ -1,0 +1,47 @@
+.Comment {
+  margin-bottom: 30px;
+}
+.Comment-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+.Comment-name {
+  color: #000;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.Comment-create {
+  color: #666;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 10px;
+}
+.Comment-description {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  max-width: 944px;
+  margin-bottom: 10px;
+}
+.Comment-btn {
+  color: #0087e9;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Comment button {
+  margin-right: 10px;
+}

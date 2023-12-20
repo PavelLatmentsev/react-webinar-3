@@ -27,7 +27,9 @@
 .SideLayout_padding_medium {
   padding: 20px;
 }
-
+.SideLayout_padding_large {
+  padding: 0 0 0 40px;
+}
 .SideLayout-item {
   margin: 0 5px;
 }

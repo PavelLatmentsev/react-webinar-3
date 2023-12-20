@@ -1,0 +1,30 @@
+.CommentAuth {
+  display: flex;
+  align-items: center;
+  margin: 30px 0 0 40px;
+}
+.CommentAuth-link {
+  color: #0087e9;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+.CommentAuth-title {
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+}
+.CommentAuth-btn {
+  color: #666;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}

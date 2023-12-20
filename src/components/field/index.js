@@ -1,12 +1,12 @@
-import {memo} from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
-import {cn as bem} from '@bem-react/classname';
+import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
-function Field({label, error, children}) {
+function Field({ label, error, children, comment }) {
   const cn = bem('Field');
   return (
-    <div className={cn()}>
+    <div className={cn(null, comment && ["comment"])}>
       <label className={cn('label')}>{label}</label>
       <div className={cn('input')}>
         {children}
