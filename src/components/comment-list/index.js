@@ -11,7 +11,6 @@ function CommentList({ list, renderItem, count }) {
       child: level - 1,
     })).slice(1)), [list])
   };
-  console.log("newComments", newCommentsList)
   const cn = bem('Commentlist');
   return (
     <div className={cn()}>

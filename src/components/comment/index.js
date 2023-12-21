@@ -11,8 +11,6 @@ import { useDispatch } from 'react-redux';
 import commentActions from '../../store-redux/comment/actions';
 
 function Comment(props) {
-    // const [viewInfo, setViewInfo] = useState(false)
-    console.log("props.openForm", props.openForm)
     const [formComment, setFormCommento] = useState({ text: "" })
     const dispatch = useDispatch();
     const cn = bem('Comment');
@@ -44,7 +42,6 @@ function Comment(props) {
         setFormCommento({ text: "" })
         props.onCloseCancel();
     };
-    console.log(Boolean({}))
     return (
         <div className={cn()} >
             <div className={cn('info')} >

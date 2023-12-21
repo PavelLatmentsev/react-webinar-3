@@ -48,32 +48,4 @@ export default {
       }
     }
   },
-
-
-
-  // setViewCancel: (id) => {
-  //   return (dispatch, getState, services) => {
-  //     console.log(getState().comment.data.items)
-  //     const data = getState().comment.data.items.map(item => {
-  //       if (item._id === id) {
-  //         return { ...item, cancel: true }
-  //       } else {
-  //         return { ...item, cancel: false }
-  //       }
-  //     }
-  //     )
-  //     console.log(data)
-  //     dispatch({ type: 'comment/view-authinfo', payload: { data } });
-  //   }
-  // },
-
-  // setCloseCancel: () => {
-  //   return (dispatch, getState, services) => {
-  //     const data = getState().comment.data.items.map(item => {
-  //       return { ...item, cancel: false }
-  //     }
-  //     )
-  //     dispatch({ type: 'comment/close-authinfo', payload: { data } });
-  //   }
-  // },
 }

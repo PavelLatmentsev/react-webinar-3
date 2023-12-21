@@ -11,14 +11,12 @@ import ArticleCard from '../../components/article-card';
 import LocaleSelect from '../../containers/locale-select';
 import TopHead from '../../containers/top-head';
 import { useDispatch } from 'react-redux';
-import shallowequal from 'shallowequal';
 import articleActions from '../../store-redux/article/actions';
 import commentActions from '../../store-redux/comment/actions';
 import { useSelector as useSelectorRedux } from 'react-redux';
 import Comment from '../../components/comment';
 import CommentList from "../../components/comment-list"
 import Field from '../../components/field';
-import SideLayout from '../../components/side-layout';
 import Textarea from '../../components/textarea';
 import useSelector from '../../hooks/use-selector';
 import CommentAuth from '../../components/comment-auth';
@@ -41,14 +39,12 @@ function Article() {
     comwait: state.comment.waiting
   }));
   const [openForm, setOpenForm] = useState("");
-  console.log(openForm)
   const onViewCancel = (id) => {
     setOpenForm(id)
   };
   const onCloseCancel = () => {
     setOpenForm("")
   }
-  // console.log(openForm)
   const [dataComment, setDataComment] = useState({ comment: "" });
   const selectFromStore = useSelector((state) => ({
     session: state.session.exists,
