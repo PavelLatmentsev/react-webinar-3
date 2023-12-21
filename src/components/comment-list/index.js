@@ -1,11 +1,17 @@
-import { memo, useState } from 'react';
+import { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import Item from '../item';
 import './style.css';
 import { cn as bem } from '@bem-react/classname';
 import listToTree from '../../utils/list-to-tree';
+import treeToList from '../../utils/tree-to-list';
 function CommentList({ list, renderItem, count }) {
-
+  const newCommentsList = {
+    comments: useMemo(() => (treeToList(listToTree(list), (item, level) => ({
+      ...item,
+      child: level - 1,
+    })).slice(1)), [list])
+  };
+  console.log("newComments", newCommentsList)
   const cn = bem('Commentlist');
   return (
     <div className={cn()}>
@@ -13,8 +19,8 @@ function CommentList({ list, renderItem, count }) {
       <div className={cn("header")}> {`Комментарии (${count})`}</div>
       {
 
-        list.map(comment =>
-          <div key={comment._id} className={cn("item")}>
+        newCommentsList.comments.map(comment =>
+          <div key={comment._id} className={cn("item")} style={{ marginLeft: `${30 * comment.child}px` }}>
             {renderItem(comment)}
           </div>
         )}

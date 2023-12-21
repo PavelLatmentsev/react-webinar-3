@@ -1,7 +1,7 @@
 .Textarea {
   margin: 0;
   padding: 0;
-  width: 944px;
+  width: 100%;
   min-height: 76px;
   margin: 10px 0;
   border: 1px solid #666;
@@ -15,4 +15,5 @@
   resize: none;
   padding: 4px 0 0 5px;
   box-sizing: border-box;
+  max-width: 944px;
 }

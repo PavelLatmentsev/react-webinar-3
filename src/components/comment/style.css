@@ -45,3 +45,6 @@
 .Comment button {
   margin-right: 10px;
 }
+.Comment button:nth-child(2) {
+  width: 67px;
+}

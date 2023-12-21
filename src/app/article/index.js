@@ -22,6 +22,7 @@ import SideLayout from '../../components/side-layout';
 import Textarea from '../../components/textarea';
 import useSelector from '../../hooks/use-selector';
 import CommentAuth from '../../components/comment-auth';
+import PaddingLayout from '../../components/padding-layout';
 
 
 function Article() {
@@ -29,10 +30,9 @@ function Article() {
   const dispatch = useDispatch();
   const params = useParams();
 
-  useInit(async () => {
+  useInit(() => {
     dispatch(articleActions.load(params.id));
     dispatch(commentActions.load(params.id))
-    await store.actions.session.remind();
   }, [params.id]);
   const select = useSelectorRedux(state => ({
     article: state.article.data,
@@ -40,11 +40,19 @@ function Article() {
     comment: state.comment.data,
     comwait: state.comment.waiting
   }));
-  const [openForm, setOpenForm] = useState(true);
+  const [openForm, setOpenForm] = useState("");
+  console.log(openForm)
+  const onViewCancel = (id) => {
+    setOpenForm(id)
+  };
+  const onCloseCancel = () => {
+    setOpenForm("")
+  }
+  // console.log(openForm)
   const [dataComment, setDataComment] = useState({ comment: "" });
-  console.log(select.comment)
   const selectFromStore = useSelector((state) => ({
-    session: state.session.exists
+    session: state.session.exists,
+    user: state.session.user
   }))
   const { t } = useTranslate();
   const heandleChange = (target) => {
@@ -73,13 +81,14 @@ function Article() {
     comment: useCallback(comment => (
       <Comment
         comment={comment}
-        session={selectFromStore.session}
+        user={selectFromStore.user}
         value={dataComment.childcomment}
         openForm={openForm}
-        setOpenForm={setOpenForm}
+        onViewCancel={onViewCancel}
+        onCloseCancel={onCloseCancel}
         params={params}
       />
-    ), []),
+    ), [openForm]),
   };
   return (
     <PageLayout>
@@ -94,7 +103,8 @@ function Article() {
       <Spinner active={select.comwait}>
         {select.comment.items && <CommentList list={select.comment.items} renderItem={renders.comment} count={select.comment.count} />}
       </Spinner>
-      {selectFromStore.session ? <SideLayout padding='large'>
+      {selectFromStore.session && !openForm ? <PaddingLayout padding="large">
+
         <form onSubmit={onSubmit}>
           <Field label={"Новый комментарий"} comment={"comment"}>
             <Textarea name='comment' value={dataComment.comment} onChange={heandleChange} />
@@ -103,7 +113,9 @@ function Article() {
             <button type='submit'>{t('comment.send')}</button>
           </Field >
         </form>
-      </SideLayout> : <CommentAuth link="Войдите" title="чтобы иметь возможность комментировать" current={false} />}
+      </PaddingLayout>
+        : !openForm ? <PaddingLayout padding="large"> <CommentAuth link="Войдите" title="чтобы иметь возможность комментировать" current={false} /> </PaddingLayout> : null}
+
     </PageLayout>
   );
 }

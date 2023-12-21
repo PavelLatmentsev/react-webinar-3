@@ -11,7 +11,8 @@ import { useDispatch } from 'react-redux';
 import commentActions from '../../store-redux/comment/actions';
 
 function Comment(props) {
-    const [viewInfo, setViewInfo] = useState(false)
+    // const [viewInfo, setViewInfo] = useState(false)
+    console.log("props.openForm", props.openForm)
     const [formComment, setFormCommento] = useState({ text: "" })
     const dispatch = useDispatch();
     const cn = bem('Comment');
@@ -22,14 +23,7 @@ function Comment(props) {
         hour: 'numeric', minute: 'numeric'
     }
     const { t } = useTranslate();
-    const onViewCancel = (id) => {
-        setViewInfo(true)
-        props.setOpenForm(false)
-    };
-    const onCloseCancel = () => {
-        setViewInfo(false)
 
-    }
     const onChange = (target) => {
 
         if (target) {
@@ -39,7 +33,7 @@ function Comment(props) {
             }));
         }
     };
-    console.log(formComment.text)
+
     const onSubmitCommentForm = (e) => {
         e.preventDefault()
         dispatch(commentActions.create({
@@ -48,36 +42,38 @@ function Comment(props) {
         }))
         dispatch(commentActions.load(props.params.id))
         setFormCommento({ text: "" })
+        props.onCloseCancel();
     };
+    console.log(Boolean({}))
     return (
-        <div className={cn()}>
-            <div className={cn('info')}>
+        <div className={cn()} >
+            <div className={cn('info')} >
                 <span className={cn('name')}> {props.comment?.author?.profile?.name}</span>
                 <span className={cn('create')}> {`${new Date(props.comment.dateCreate).toLocaleDateString('ru-RU', optionsYear).split("г.")[0]}  в ${new Date(props.comment.dateCreate).toLocaleDateString('ru-RU', optionsHour).split(",")[1]} `}</span>
             </div>
             <div className={cn('description')}>
                 {props.comment.text}
             </div>
-            <button className={cn('btn')} onClick={() => onViewCancel()}>Ответить</button>{
+            <button className={cn('btn')} onClick={() => props.onViewCancel(props.comment._id)}>Ответить</button>{
                 props.comment.cancel &&
                 <CommentAuth link="Войдите" title="чтобы иметь возможность ответить." current={true} btn="Отмена" onCloseCancel={props.onCloseCancel} />
             }
 
-            {props.session && viewInfo ? <SideLayout>
+            {Object.keys(props.user).length !== 0 && (props.openForm === props.comment._id) ?
                 <form onSubmit={onSubmitCommentForm} className={cn('form')}>
                     <Field label={"Новый ответ"} comment={"comment"}>
                         <Textarea name="text" value={formComment.text} onChange={onChange} />
                     </Field>
                     <Field comment={"comment"}>
                         <button type='submit' className={cn('btn')}>{t('comment.send')}</button>
-                        <button className={cn('btn')} onClick={onCloseCancel} >{t('comment.cancel')}</button>
+                        <button className={cn('btn')} onClick={props.onCloseCancel} >{t('comment.cancel')}</button>
                     </Field >
 
                 </form>
-            </SideLayout> : null}
+                : null}
 
 
-            {!props.session && props.comment.cancel ? <CommentAuth link="Войдите" title="чтобы иметь возможность комментировать" current={false} /> : null}
+            {Object.keys(props.user).length === 0 && props.openForm === props.comment._id ? <CommentAuth link="Войдите" title="чтобы иметь возможность комментировать" current={false} /> : null}
 
         </div>
     );

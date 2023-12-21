@@ -1,0 +1,15 @@
+.PaddingLayout {
+}
+
+.PaddingLayout_padding_small {
+  padding: 10px 20px;
+}
+
+.PaddingLayout_padding_medium {
+  padding: 20px;
+}
+.PaddingLayout_padding_large {
+  padding: 0 40px;
+}
+.PaddingLayout-item {
+}
