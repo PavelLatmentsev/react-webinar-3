@@ -12,7 +12,7 @@ function LocaleSelect() {
     lang: useMemo(() => ([
       { value: 'ru', title: 'Русский' },
       { value: 'en', title: 'English' },
-    ]), [])
+    ]), [locale])
   };
 
   return (

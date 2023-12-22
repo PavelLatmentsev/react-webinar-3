@@ -1,9 +1,8 @@
 import * as translations from "./translations"
 
-class i18n {
+class I18n {
     constructor(services, config = {}) {
         this.services = services;
-        this.locale = 'ru';
         this.config = config;
         this.listeners = [];
     }
@@ -14,22 +13,6 @@ class i18n {
         }
     }
 
-    translate(locale = "ru", text, plural) {
-        let result = translations[locale] && (text in translations[locale])
-            ? translations[locale][text]
-            : text
-
-        if (typeof plural !== 'undefined') {
-            const key = new Intl.PluralRules(locale).select(plural)
-            if (key in result) {
-                result = result[key]
-            }
-        }
-
-        return result
-    }
-
-
     getLocale() {
         return this.config.locale
     }
@@ -37,15 +20,27 @@ class i18n {
     setLocale(locale) {
         this.services.api.defaultHeaders = {
             ...this.services.api.defaultHeaders,
-            'X-Lang': locale,
+            'X-Lang': this.config.locale,
         }
         this.config = {
             ...this.config,
             locale,
         }
-        for (const listener of this.listeners) listener(this.locale);
+        for (const listener of this.listeners) listener(this.config.locale);
     }
 
+    translate(text, plural, locale = this.config.locale) {
+        let result = translations[locale] && (text in translations[locale])
+            ? translations[locale][text]
+            : text
+        if (typeof plural !== 'undefined') {
+            const key = new Intl.PluralRules(locale).select(plural)
+            if (key in result) {
+                result = result[key]
+            }
+        }
+        return result
+    }
 }
 
-export default i18n;
+export default I18n;

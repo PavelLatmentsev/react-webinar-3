@@ -1,7 +1,7 @@
 import APIService from './api';
 import Store from './store';
 import createStoreRedux from './store-redux';
-import i18n from "./i18n"
+import I18n from "./i18n"
 class Services {
 
   constructor(config) {
@@ -42,7 +42,7 @@ class Services {
 
   get i18n() {
     if (!this._i18n) {
-      this._i18n = new i18n(this, this.config.i18n)
+      this._i18n = new I18n(this, this.config.i18n)
     }
     return this._i18n;
   }

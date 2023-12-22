@@ -14,16 +14,13 @@ function Main() {
 
   const store = useStore();
   const { t, locale } = useTranslate();
-  console.log(t('title'))
-  console.log(t(locale))
+
   useInit(async () => {
     await Promise.all([
       store.actions.catalog.initParams(),
       store.actions.categories.load()
     ]);
   }, [locale], true);
-
-
 
   return (
     <PageLayout>
