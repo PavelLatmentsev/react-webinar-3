@@ -20,7 +20,7 @@ class I18n {
     setLocale(locale) {
         this.services.api.defaultHeaders = {
             ...this.services.api.defaultHeaders,
-            'X-Lang': this.config.locale,
+            'X-Lang': locale,
         }
         this.config = {
             ...this.config,

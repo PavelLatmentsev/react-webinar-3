@@ -17,3 +17,11 @@
   box-sizing: border-box;
   max-width: 944px;
 }
+.Textarea::placeholder {
+  color: #000;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}

@@ -11,5 +11,9 @@
 .PaddingLayout_padding_large {
   padding: 0 40px;
 }
+
+.PaddingLayout_padding_largeSide {
+  padding: 0 40px 30px 40px;
+}
 .PaddingLayout-item {
 }

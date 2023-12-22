@@ -5,14 +5,12 @@ import useTranslate from '../../hooks/use-translate';
 import Select from '../../components/select';
 
 function LocaleSelect() {
-
   const { locale, newLocale } = useTranslate();
-
   const options = {
     lang: useMemo(() => ([
       { value: 'ru', title: 'Русский' },
       { value: 'en', title: 'English' },
-    ]), [locale])
+    ]), [])
   };
 
   return (

@@ -1,13 +1,13 @@
-import {memo, useCallback} from 'react';
+import { memo, useCallback } from 'react';
 import SideLayout from '../../components/side-layout';
-import {Link, useLocation, useNavigate} from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useTranslate from '../../hooks/use-translate';
 import useSelector from '../../hooks/use-selector';
 import useStore from '../../hooks/use-store';
 
 function TopHead() {
 
-  const {t} = useTranslate();
+  const { t } = useTranslate();
   const navigate = useNavigate();
   const location = useLocation();
   const store = useStore();
@@ -20,7 +20,7 @@ function TopHead() {
   const callbacks = {
     // Переход к авторизации
     onSignIn: useCallback(() => {
-      navigate('/login', {state: {back: location.pathname}});
+      navigate('/login', { state: { back: location.pathname } });
     }, [location.pathname]),
 
     // Отмена авторизации

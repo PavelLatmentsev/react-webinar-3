@@ -33,3 +33,6 @@
 .SideLayout-item {
   margin: 0 5px;
 }
+.SideLayout button {
+  cursor: pointer;
+}

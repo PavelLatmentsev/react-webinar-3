@@ -5,7 +5,6 @@ import CommentAuth from '../comment-auth';
 import './style.css';
 import Field from '../field';
 import Textarea from '../textarea';
-import SideLayout from '../side-layout';
 import useTranslate from '../../hooks/use-translate';
 import { useDispatch } from 'react-redux';
 import commentActions from '../../store-redux/comment/actions';
@@ -34,13 +33,15 @@ function Comment(props) {
 
     const onSubmitCommentForm = (e) => {
         e.preventDefault()
-        dispatch(commentActions.create({
-            "text": formComment.text,
-            "parent": { "_id": `${props.comment._id}`, "_type": "comment" }
-        }))
-        dispatch(commentActions.load(props.params.id))
-        setFormCommento({ text: "" })
-        props.onCloseCancel();
+        if (formComment.text) {
+            dispatch(commentActions.create({
+                "text": formComment.text,
+                "parent": { "_id": `${props.comment._id}`, "_type": "comment" }
+            }))
+            dispatch(commentActions.load(props.params.id))
+            setFormCommento({ text: "" })
+            props.onCloseCancel();
+        } else { return }
     };
     return (
         <div className={cn()} >
@@ -59,7 +60,7 @@ function Comment(props) {
             {Object.keys(props.user).length !== 0 && (props.openForm === props.comment._id) ?
                 <form onSubmit={onSubmitCommentForm} className={cn('form')}>
                     <Field label={"Новый ответ"} comment={"comment"}>
-                        <Textarea name="text" value={formComment.text} onChange={onChange} />
+                        <Textarea name="text" value={formComment.text} onChange={onChange} placeholder={`Мой ответ для ${props.comment?.author?.profile?.name}`} />
                     </Field>
                     <Field comment={"comment"}>
                         <button type='submit' className={cn('btn')}>{t('comment.send')}</button>
