@@ -8,6 +8,7 @@ import Textarea from '../textarea';
 import useTranslate from '../../hooks/use-translate';
 import { useDispatch } from 'react-redux';
 import commentActions from '../../store-redux/comment/actions';
+import PaddingLayout from '../padding-layout';
 
 function Comment(props) {
     const [formComment, setFormCommento] = useState({ text: "" })
@@ -58,16 +59,18 @@ function Comment(props) {
             }
 
             {Object.keys(props.user).length !== 0 && (props.openForm === props.comment._id) ?
-                <form onSubmit={onSubmitCommentForm} className={cn('form')}>
-                    <Field label={"Новый ответ"} comment={"comment"}>
-                        <Textarea name="text" value={formComment.text} onChange={onChange} placeholder={`Мой ответ для ${props.comment?.author?.profile?.name}`} />
-                    </Field>
-                    <Field comment={"comment"}>
-                        <button type='submit' className={cn('btn')}>{t('comment.send')}</button>
-                        <button className={cn('btn')} onClick={props.onCloseCancel} >{t('comment.cancel')}</button>
-                    </Field >
+                <PaddingLayout padding="side">
+                    <form onSubmit={onSubmitCommentForm} className={cn('form')}>
+                        <Field label={"Новый ответ"} comment={"comment"}>
+                            <Textarea name="text" value={formComment.text} onChange={onChange} placeholder={`Мой ответ для ${props.comment?.author?.profile?.name}`} />
+                        </Field>
+                        <Field comment={"comment"}>
+                            <button type='submit' className={cn('btn')}>{t('comment.send')}</button>
+                            <button className={cn('btn')} onClick={props.onCloseCancel} >{t('comment.cancel')}</button>
+                        </Field >
 
-                </form>
+                    </form>
+                </PaddingLayout>
                 : null}
 
 

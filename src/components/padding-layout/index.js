@@ -16,7 +16,7 @@ function PaddingLayout({ children, padding }) {
 
 PaddingLayout.propTypes = {
   children: PropTypes.node,
-  padding: PropTypes.oneOf(['small', 'medium', "large", "largeSide"]),
+  padding: PropTypes.oneOf(['small', 'medium', "large", "largeSide", "side"]),
 }
 
 PaddingLayout.defaultProps = {};

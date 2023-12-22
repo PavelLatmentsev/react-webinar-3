@@ -27,16 +27,11 @@ function CommentList({ list, renderItem, count }) {
   )
 }
 
-// List.propTypes = {
-//   list: PropTypes.arrayOf(PropTypes.shape({
-//     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-//   })).isRequired,
-//   renderItem: PropTypes.func,
-// };
-
-// List.defaultProps = {
-//   renderItem: (item) => {
-//   },
-// }
-
+CommentList.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  })).isRequired,
+  renderItem: PropTypes.func.isRequired,
+  count: PropTypes.number.isRequired
+};
 export default memo(CommentList);
