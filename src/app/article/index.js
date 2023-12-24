@@ -21,18 +21,17 @@ function Article() {
   const store = useStore();
   const dispatch = useDispatch();
   const params = useParams();
-
+  const { t, locale } = useTranslate();
   useInit(() => {
     dispatch(articleActions.load(params.id));
     dispatch(commentActions.load(params.id))
-  }, [params.id]);
+  }, [params.id, locale]);
   const select = useSelectorRedux(state => ({
     article: state.article.data,
     waiting: state.article.waiting,
     comwait: state.comment.waiting
   }));
 
-  const { t } = useTranslate();
 
   const callbacks = {
     // Добавление в корзину

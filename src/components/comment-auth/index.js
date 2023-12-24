@@ -6,14 +6,12 @@ import './style.css';
 
 
 function CommentAuth(props) {
-
-
     const cn = bem('CommentAuth');
     return (
         <>
             {
                 <div className={cn()}>
-                    <Link to={'/login'} className={cn("link")}>{props.link}</Link>,  <span className={cn("title")}> {props.title}</span>
+                    <Link to={'/login'} state={{ back: props.location.pathname }} className={cn("link")} >{props.link}</Link>,  <span className={cn("title")}> {props.title}</span>
 
                     {props.current && <button className={cn("btn")} onClick={props.onCloseCancel}>{props.btn}</button>}
                 </div>

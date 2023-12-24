@@ -19,7 +19,7 @@ function CommentList({ list, renderItem, count }) {
       {
 
         newCommentsList.comments.map(comment =>
-          <div key={comment._id} className={cn("item")} style={{ marginLeft: `${30 * comment.child}px` }}>
+          <div key={comment._id} className={cn("item")} style={comment.child < 5 ? { marginLeft: `${30 * comment.child}px` } : { marginLeft: `${(30 * comment.child) - (comment.child - 5) * 30}px` }}>
             {renderItem(comment)}
           </div>
         )}

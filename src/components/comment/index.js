@@ -11,6 +11,7 @@ import commentActions from '../../store-redux/comment/actions';
 import PaddingLayout from '../padding-layout';
 
 function Comment(props) {
+
     const [formComment, setFormCommento] = useState({ text: "" })
     const dispatch = useDispatch();
     const cn = bem('Comment');
@@ -31,15 +32,13 @@ function Comment(props) {
             }));
         }
     };
-
     const onSubmitCommentForm = (e) => {
         e.preventDefault()
-        if (formComment.text) {
+        if (formComment.text.trim()) {
             dispatch(commentActions.create({
                 "text": formComment.text,
                 "parent": { "_id": `${props.comment._id}`, "_type": "comment" }
             }))
-            dispatch(commentActions.load(props.params.id))
             setFormCommento({ text: "" })
             props.onCloseCancel();
         } else { return }
@@ -47,22 +46,18 @@ function Comment(props) {
     return (
         <div className={cn()} >
             <div className={cn('info')} >
-                <span className={cn('name')}> {props.comment?.author?.profile?.name}</span>
+                <span className={cn(props.user._id === props.comment.author._id ? "current" : 'name')}  > {props.comment?.author?.profile?.name}</span>
                 <span className={cn('create')}> {`${new Date(props.comment.dateCreate).toLocaleDateString('ru-RU', optionsYear).split("г.")[0]}  в ${new Date(props.comment.dateCreate).toLocaleDateString('ru-RU', optionsHour).split(",")[1]} `}</span>
             </div>
             <div className={cn('description')}>
                 {props.comment.text}
             </div>
-            <button className={cn('btn')} onClick={() => props.onViewCancel(props.comment._id)}>Ответить</button>{
-                props.comment.cancel &&
-                <CommentAuth link="Войдите" title="чтобы иметь возможность ответить." current={true} btn="Отмена" onCloseCancel={props.onCloseCancel} />
-            }
-
+            <button className={cn('btn')} onClick={() => props.onViewCancel(props.comment._id)}>Ответить</button>
             {Object.keys(props.user).length !== 0 && (props.openForm === props.comment._id) ?
                 <PaddingLayout padding="side">
                     <form onSubmit={onSubmitCommentForm} className={cn('form')}>
                         <Field label={"Новый ответ"} comment={"comment"}>
-                            <Textarea name="text" value={formComment.text} onChange={onChange} placeholder={`Мой ответ для ${props.comment?.author?.profile?.name}`} />
+                            <Textarea name="text" value={formComment.text} onChange={onChange} />
                         </Field>
                         <Field comment={"comment"}>
                             <button type='submit' className={cn('btn')}>{t('comment.send')}</button>
@@ -74,7 +69,7 @@ function Comment(props) {
                 : null}
 
 
-            {Object.keys(props.user).length === 0 && props.openForm === props.comment._id ? <CommentAuth link="Войдите" title="чтобы иметь возможность комментировать" current={false} /> : null}
+            {Object.keys(props.user).length === 0 && props.openForm === props.comment._id ? <CommentAuth link="Войдите" title="чтобы иметь возможность ответить." btn="Отмена" current={true} onCloseCancel={props.onCloseCancel} location={props.location} /> : null}
 
         </div>
     );

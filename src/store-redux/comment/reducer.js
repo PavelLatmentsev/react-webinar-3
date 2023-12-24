@@ -15,25 +15,20 @@ function reducer(state = initialState, action) {
       return { ...state, data: action.payload.data, waiting: false };
 
     case "comment/load-error":
-      return { ...state, data: {}, waiting: false }; //@todo текст ошибки сохранять?
+      return { ...state, data: {}, waiting: false };
     case "comment/create-start":
       return { ...state, waiting: true };
 
     case "comment/create-success":
-      return { ...state, data: { ...data, items: [...data.items, action.payload.data], count: count + 1 || 0 }, waiting: false };
+      return { ...state, data: { items: [...state.data.items, action.payload.data], count: state.data.count + 1 || 0 }, waiting: false };
 
-    case "comment/view-authinfo":
-
-      return { ...state, data: action.payload.data, waiting: false }
-    // return { ...state, data: { ...data, items: [...data.items, action.payload.data] }, waiting: false };
-    case "comment/close-authinfo":
-      return { ...state, data: { ...state.data, items: [...state.data.items, action.payload.data] }, waiting: false };
     case "comment/create-error":
-      return { ...state, data: {}, waiting: false }; //@todo текст ошибки сохранять?
+      return { ...state, data: {}, waiting: false };
     default:
       // Нет изменений
       return state;
   }
+
 }
 
 export default reducer;

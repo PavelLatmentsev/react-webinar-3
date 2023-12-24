@@ -11,12 +11,14 @@ import Textarea from '../../components/textarea';
 import useSelector from '../../hooks/use-selector';
 import CommentAuth from '../../components/comment-auth';
 import PaddingLayout from '../../components/padding-layout';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 
 function Comments() {
     const params = useParams();
     const dispatch = useDispatch();
+    const location = useLocation();
+
     const select = useSelectorRedux(state => ({
         comment: state.comment.data,
         comwait: state.comment.waiting
@@ -29,7 +31,6 @@ function Comments() {
     const onCloseCancel = () => {
         setOpenForm("")
     }
-
     const selectFromStore = useSelector((state) => ({
         session: state.session.exists,
         user: state.session.user
@@ -46,12 +47,11 @@ function Comments() {
     };
     const onSubmit = (e) => {
         e.preventDefault()
-        if (dataComment.comment) {
+        if (dataComment.comment.trim()) {
             dispatch(commentActions.create({
                 "text": dataComment.comment,
                 "parent": { "_id": `${params.id}`, "_type": "article" }
             }))
-            dispatch(commentActions.load(params.id))
             setDataComment({ comment: "" })
         } else {
             return
@@ -67,6 +67,7 @@ function Comments() {
                 onViewCancel={onViewCancel}
                 onCloseCancel={onCloseCancel}
                 params={params}
+                location={location}
             />
         ), [openForm]),
     };
@@ -86,7 +87,7 @@ function Comments() {
                     </Field >
                 </form>
             </PaddingLayout>
-                : !openForm ? <PaddingLayout padding="largeSide"> <CommentAuth link="Войдите" title="чтобы иметь возможность комментировать" current={false} /> </PaddingLayout> : null}
+                : !openForm ? <PaddingLayout padding="largeSide"> <CommentAuth link="Войдите" title="чтобы иметь возможность комментировать" current={false} location={location} /> </PaddingLayout> : null}
 
         </>
     );

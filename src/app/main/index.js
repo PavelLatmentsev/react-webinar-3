@@ -14,7 +14,7 @@ function Main() {
 
   const store = useStore();
   const { t, locale } = useTranslate();
-
+  console.log(locale)
   useInit(async () => {
     await Promise.all([
       store.actions.catalog.initParams(),
