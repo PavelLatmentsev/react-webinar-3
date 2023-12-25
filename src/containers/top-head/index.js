@@ -11,7 +11,6 @@ function TopHead() {
   const navigate = useNavigate();
   const location = useLocation();
   const store = useStore();
-  console.log(location)
   const select = useSelector(state => ({
     user: state.session.user,
     exists: state.session.exists

@@ -49,7 +49,7 @@ function Comments() {
         e.preventDefault()
         if (dataComment.comment.trim()) {
             dispatch(commentActions.create({
-                "text": dataComment.comment,
+                "text": dataComment.comment.trim(),
                 "parent": { "_id": `${params.id}`, "_type": "article" }
             }))
             setDataComment({ comment: "" })
@@ -68,8 +68,9 @@ function Comments() {
                 onCloseCancel={onCloseCancel}
                 params={params}
                 location={location}
+                session={selectFromStore.session}
             />
-        ), [openForm]),
+        ), [openForm, selectFromStore.user]),
     };
     return (
         <>

@@ -22,5 +22,8 @@
   "session.signIn": "Sign In",
   "session.signOut": "Sign Out",
   "comment.send": "Send",
-  "comment.cancel": "Cancel"
+  "comment.cancel": "Cancel",
+  "article.country":"Country",
+  "article.category":"Category ",
+  "article.year":"Year"
 }

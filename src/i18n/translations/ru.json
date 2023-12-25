@@ -24,5 +24,8 @@
   "session.signIn": "Вход",
   "session.signOut": "Выход",
   "comment.send": "Отправить",
-  "comment.cancel": "Отмена"
+  "comment.cancel": "Отмена",
+  "article.country":"Страна производитель",
+  "article.category":"Категория ",
+  "article.year":"Год"
 }

@@ -20,3 +20,6 @@
 }
 .PaddingLayout-item {
 }
+.PaddingLayout-item .CommentAuth {
+  margin: 0;
+}

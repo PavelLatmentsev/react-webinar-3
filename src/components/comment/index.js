@@ -36,7 +36,7 @@ function Comment(props) {
         e.preventDefault()
         if (formComment.text.trim()) {
             dispatch(commentActions.create({
-                "text": formComment.text,
+                "text": formComment.text.trim(),
                 "parent": { "_id": `${props.comment._id}`, "_type": "comment" }
             }))
             setFormCommento({ text: "" })
@@ -53,7 +53,7 @@ function Comment(props) {
                 {props.comment.text}
             </div>
             <button className={cn('btn')} onClick={() => props.onViewCancel(props.comment._id)}>Ответить</button>
-            {Object.keys(props.user).length !== 0 && (props.openForm === props.comment._id) ?
+            {Object.keys(props.user).length !== 0 && (props.openForm === props.comment._id) && props.session ?
                 <PaddingLayout padding="side">
                     <form onSubmit={onSubmitCommentForm} className={cn('form')}>
                         <Field label={"Новый ответ"} comment={"comment"}>
